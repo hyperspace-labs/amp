@@ -23,6 +23,9 @@ package std93 is
   -- function uresize
   -- function iresize
 
+  -- Addition operators
+  function "+"(arr: logics; rhs: logic) return logics;
+
 end package;
 
 package body std93 is
@@ -194,6 +197,19 @@ package body std93 is
     end loop;
 
     return result;
+  end function;
+
+
+  -- Addition
+  --
+  -- This function adds a logical bit to a logic vector. It is useful for when
+  -- a counter must increment by 1. The addition is performed in an unsigned
+  -- interpretation before being casted by to logic.
+  function "+"(arr: logics; rhs: logic) return logics is
+    variable temp: logics(0 downto 0);
+  begin
+    temp(0) := rhs;
+    return logics(usign(arr) + resize(usign(temp), arr'length));
   end function;
 
 end package body;
