@@ -6,43 +6,33 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-package math is
-    -- The mathematical constant Pi.
-    constant PI: real := 3.141592653589793;
-
-    -- The mathematical constant e.
-    constant E: real := 2.718281828459045;
-
-    -- The Mathematical constant tau- the ratio of a circle's circumference to 
-    -- its radius.
-    constant TAU: real := 6.283185307179586;
-    
-    -- Computes the logarithmic (base 2) for 'enums' and takes the ceiling
-    -- value. Determines the minimum number of bits required to represent 
-    -- 'num' possible values.
+package math is    
+    -- This function computes the logarithmic (base 2) for `num` and takes the 
+    -- ceiling of the result. It effectively determines the minimum number of 
+    -- bits required to represent `num` possible values of a space.
     --
     -- Equation: ceil(log2(num))
-    function clog2(num: positive) return positive;
+    function clog2(num: natural) return natural;
 
     -- This function determines the minimum number of bits required to represent 
-    -- the 'num' decimal number in standard binary representation.
+    -- the `num` as a decimal number in standard binary representation.
     --
     -- Equation: floor(log2(num) + 1)
-    function flog2p1(num: positive) return positive;
+    function flog2p1(num: natural) return natural;
 
-    -- This function computes 2 raised to the 'num' power.
-    --
-    -- This effectively computes the maximum number of possible values
-    -- represented in a vector with 'num' width.
+    -- This function computes 2 raised to the `num` power.
+    -- 
+    -- It effectively determines the maximum number of possible values of a
+    -- space represented in binary for a vector with `num` width.
     function pow2(num: natural) return natural;
 
-    -- This function computes 2 raised to the 'num' minus 1 power.
+    -- This function computes 2 raised to the `num` minus 1 power.
     -- 
-    -- It effectively determines the maximum represented number for a vector
-    -- with 'num' width.
+    -- It effectively determines the maximum number represented in binary for a 
+    -- vector with `num` width.
     function pow2m1(num: natural) return natural;
 
-    --* Determines if a number is a power of 2.
+    -- This function checks if `num` is a power of 2.
     function is_pow2(num: natural) return boolean;
 
 end package;
@@ -50,12 +40,12 @@ end package;
 
 package body math is
 
-  function clog2(num: positive) return positive is
+  function clog2(num: natural) return natural is
     variable count: positive := 1;
     variable total: positive := 1;
   begin
-    if num = 1 then
-      return 1;
+    if num = 0 or num = 1 then
+      return num;
     end if;
     -- Count number of powers of 2 until matching or exceeding the number.
     loop 
@@ -70,7 +60,7 @@ package body math is
   end function;
 
 
-  function flog2p1(num: positive) return positive is
+  function flog2p1(num: natural) return natural is
     variable count: positive := 1;
     variable total: positive := 1;
   begin
