@@ -13,7 +13,11 @@ architecture sim of dim_tb is
 
   signal s0: logic;
 
+  signal line0: logics(3 downto 0) := "1111";
+
 begin
+
+  line0(index1d(2, line0'length)) <= '0';
 
   uut: entity work.pseudo
     port map(
@@ -35,6 +39,11 @@ begin
     row := get2d1d(grid, 1, X_LEN);
     -- col := get2d1d(grid, 4, Y_LEN);
     row(0) := '1';
+
+    row(index1d(0, row'length)) := '0';
+    report logic'image(row(index1d(0, row'length)));
+
+    report logic'image(line0(index1d(2, line0'length)));
     wait;
   end process;
 

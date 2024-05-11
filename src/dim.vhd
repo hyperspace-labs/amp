@@ -15,6 +15,10 @@ package dim is
   -- This function accesses a point from 1-dimensional space.
   function get1d(arr: logics; x: usize) return logic;
 
+  -- Stores a point in 1-dimensional space.
+  -- procedure set1d(signal arr: inout logics; value: logic; x: usize);
+  function index1d(x: usize; x_max: usize) return usize;
+
   -- This function accesses a point from 2-dimensional space.
   function get2d(arr: logics; x: usize; y: usize; x_max: usize) return logic;
 
@@ -38,6 +42,12 @@ package body dim is
   function get1d(arr: logics; x: usize) return logic is
   begin
     return arr(x);
+  end function;
+
+
+  function index1d(x: usize; x_max: usize) return usize is
+  begin
+    return x;
   end function;
 
 
