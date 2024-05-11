@@ -5,6 +5,7 @@ use ieee.numeric_std.all;
 library work;
 use work.types.all;
 use work.dim.all;
+use work.cast.all;
 
 entity dim_tb is
 end entity;
@@ -15,9 +16,18 @@ architecture sim of dim_tb is
 
   signal line0: logics(3 downto 0) := "1111";
 
+  constant A_LEN: usize := 2;
+  constant B_LEN: usize := 4;
+
+  signal g0: logics(A_LEN*B_LEN-1 downto 0) := (others => '0');
+
+  signal a0: logics(A_LEN-1 downto 0) := "11";
+
 begin
 
-  line0(index1d(2, line0'length)) <= '0';
+  g0 <= set_2d1d(g0, a0, 1);
+
+  line0(index_1d(2)) <= '0';
 
   uut: entity work.pseudo
     port map(
@@ -36,14 +46,19 @@ begin
     variable col: logics(Y_LEN-1 downto 0);
   begin
 
-    row := get2d1d(grid, 1, X_LEN);
+    row := get_2d1d(grid, row, 0);
     -- col := get2d1d(grid, 4, Y_LEN);
     row(0) := '1';
 
-    row(index1d(0, row'length)) := '0';
-    report logic'image(row(index1d(0, row'length)));
+    row(index_1d(0)) := '0';
+    report logic'image(row(index_1d(0)));
 
-    report logic'image(line0(index1d(2, line0'length)));
+    report logic'image(line0(index_1d(2)));
+
+    wait for 0 ns;
+
+    report to_str(g0);
+    report to_str(get_2d1d(g0, a0, 1));
     wait;
   end process;
 

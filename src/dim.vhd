@@ -12,12 +12,42 @@ use work.types.all;
 
 package dim is
 
+  -- Computes the index for accessing a point in a 1-dimensional space for a linear
+  -- vector.
+  --
+  -- Assumes the space is X.
+  function index_1d(x: usize) return usize;
+
+  -- Computes the index for accessing a point in a 2-dimensional space for a linear
+  -- vector.
+  -- 
+  -- Assumes the space is X * Y.
+  function index_2d(x: usize; y: usize; x_len: psize) return usize;
+
+  -- Computes the index for accessing a point in a 3-dimensional space for a linear
+  -- vector.
+  --
+  -- Assumes the space is X * Y * Z.
+  function index_3d(x: usize; y: usize; z: usize; x_len: psize; y_len: psize) return usize;
+
+  -- function get_1d(v_1d: logics; x: usize) return logic;
+
+  -- function get_2d(v_2d: logics; x_len: usize; x: usize; y: usize) return logic;
+
+  -- Returns the 1-dimensional subspace of len(`v_x`) at index `y` of the 2-dimensional
+  -- space `v_yx`.
+  function get_2d1d(v_yx: logics; v_x: logics; y: usize; offset: usize := 0) return logics;
+
+  -- Returns the 2-dimensional space after storing the 1-dimensional value `v_x`
+  -- at index `y` of the 2-dimensional space `v_yx`.
+  function set_2d1d(v_yx: logics; v_x: logics; y: usize; offset: usize := 0) return logics;
+
+
+
+  -- refactor below --
+
   -- This function accesses a point from 1-dimensional space.
   function get1d(arr: logics; x: usize) return logic;
-
-  -- Stores a point in 1-dimensional space.
-  -- procedure set1d(signal arr: inout logics; value: logic; x: usize);
-  function index1d(x: usize; x_max: usize) return usize;
 
   -- This function accesses a point from 2-dimensional space.
   function get2d(arr: logics; x: usize; y: usize; x_max: usize) return logic;
@@ -33,21 +63,75 @@ package dim is
   -- as a 3-dimensional space, where each grid is `x_max` * `y_max` large.
   function get3d2d(arr: logics; z: usize; x_max: usize; y_max: usize) return logics;
 
+
+  
+
 end package;
 
 
 package body dim is
 
+  function get_2d1d(v_yx: logics; v_x: logics; y: usize; offset: usize := 0) return logics is
+    variable shift: usize := offset + v_yx'low;
+    variable x_len: usize := v_x'length;
+  begin
+    if v_yx'ascending = true then
+      return v_yx((y*x_len)+shift to ((y+1)*x_len)-1+shift);
+    else
+      return v_yx(((y+1)*x_len)-1+shift downto (y*x_len)+shift);
+    end if;
+  end function;
+
+
+  function set_2d1d(v_yx: logics; v_x: logics; y: usize; offset: usize := 0) return logics is
+    variable x_len: usize := v_x'length;
+    variable inner_v_yx: logics(v_yx'range) := v_yx;
+    variable shift: usize := offset + v_yx'low;
+  begin
+    if inner_v_yx'ascending = true then
+      inner_v_yx((y*x_len)+shift to ((y+1)*x_len)-1+shift) := v_x;
+    else 
+      inner_v_yx(((y+1)*x_len)-1+shift downto (y*x_len)+shift) := v_x;
+    end if;
+    return inner_v_yx;
+  end function;
+
+  function index_1d(x: usize) return usize is
+  begin
+    return x;
+  end function;
+
+
+  function index_2d(x: usize; y: usize; x_len: psize) return usize is
+  begin
+    return (x_len * y) + x;
+  end function;
+
+
+  function index_3d(x: usize; y: usize; z: usize; x_len: psize; y_len: psize) return usize is
+  begin
+    return (x_len * y_len * z) + (x_len * y) + x;
+  end function;
+
+
+  -- function index_2d1d(y: usize; x_len: usize; offset: usize := 0) return voids is
+  --   variable shift: usize := offset;
+  --   variable sect: voids(((y+1)*x_len)-1+shift downto (y*x_len)+shift);
+  -- begin
+  --   return sect;
+  -- end function;
+  -- begin
+  --   if arr'ascending = true then
+  --     return arr((x_max * y) + shift to (x_max * (y + 1)) - 1 + shift);
+  --   end if;
+  --   return arr((x_max * (y + 1)) - 1 + shift downto (x_max * y) + shift);
+  -- end function;
+
+  -- everything below to be refactored --
 
   function get1d(arr: logics; x: usize) return logic is
   begin
     return arr(x);
-  end function;
-
-
-  function index1d(x: usize; x_max: usize) return usize is
-  begin
-    return x;
   end function;
 
 

@@ -107,4 +107,10 @@ package types is
   -- A severity level type.
   subtype sevel is severity_level;
 
+  -- An empty type.
+  type void is (none);
+
+  -- A fixed-size array of `void` element types.
+  type voids is array(natural range<>) of void;
+
 end package;
