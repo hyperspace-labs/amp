@@ -44,6 +44,9 @@ package types is
   -- A character type.
   subtype char is character;
 
+  -- Another naming notation for compiler-sized signed integer type.
+  subtype int is integer;
+
   -- A fixed-size array of `char` element types.
   subtype str is string;
 

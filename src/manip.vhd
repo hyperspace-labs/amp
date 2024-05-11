@@ -13,192 +13,81 @@ use work.types.all;
 
 package manip is
 
-  -- Shift operators
-  function "sll"(arr: logics; amount: usize) return logics;
-  function "srl"(arr: logics; amount: usize) return logics;
-  function "sla"(arr: logics; amount: usize) return logics;
-  function "sra"(arr: logics; amount: usize) return logics;
+  -- This function shifts a logic vector logically to the left while inserting 
+  -- zeros from the right. It is a zero-fill left-shift.
+  function shift_ll(v: logics; amt: usize) return logics;
 
-  -- Rotation operators
-  function "ror"(arr: logics; amount: usize) return logics;
-  function "rol"(arr: logics; amount: usize) return logics;
+  -- This function shifts a logic vector logically to the right while inserting 
+  -- zeros from the left. It is a zero-fill right-shift.
+  function shift_rl(v: logics; amt: usize) return logics;
 
-  -- Extension functions
-  -- function zero_extend(arr: logics; amount: usize) return logics;
-  -- function sign_extend(arr: logics; amount: usize) return logics;
-  -- function uresize
-  -- function iresize
-
-  -- Addition operators
-  function "+"(arr: logics; rhs: logic) return logics;
-
-end package;
-
-package body manip is
-
-  -- Unresolved logic operators.
-
-  -- Shift-left-logical
-  --
-  -- This function shifts a logic vector to the left while inserting zeros from
-  -- the right. It is a zero-fill left-shift.
-  function "sll"(arr: logics; amount: usize) return logics is
-    variable result: logics(arr'range);
-  begin
-    if arr'length = 1 and amount > 0 then
-      return "0";
-    end if;
-
-    result := arr;
-    -- shift left logical 'amount' times
-    for i in 1 to amount loop
-      -- provided with 'to'
-      if arr'ascending = true then
-        result := result(arr'left+1 to arr'right) & "0";
-      -- provided with 'downto'
-      else 
-        result := result(arr'left-1 downto arr'right) & "0";
-      end if;
-    end loop;
-
-    return result;
-  end function;
-
-
-  -- Shift-right-logical
-  --
-  -- This function shifts a logic vector to the right while inserting zeros from
-  -- the left. It is a zero-fill right-shift.
-  function "srl"(arr: logics; amount: usize) return logics is
-    variable result: logics(arr'range);
-  begin
-    if arr'length = 1 and amount > 0 then
-      return "0";
-    end if;
-
-    result := arr;
-    -- shift right logical 'amount' times
-    for i in 1 to amount loop
-      -- provided with 'to'
-      if arr'ascending = true then
-        result := "0" & result(arr'left to arr'right-1);
-      -- provided with 'downto'
-      else 
-        result := "0" & result(arr'left downto arr'right+1);
-      end if;
-    end loop;
-
-    return result;
-  end function;
-
-
-  -- Shift-left-arithmetic
-  --
   -- This function shifts a logic vector to the left while inserting zeros from
   -- the right. It is a zero-fill left-shift.
   --
   -- When the logic vector's range is ascending, then this operation performs
   -- sticky right-shift with the MSB being inserted from the right.
-  function "sla"(arr: logics; amount: usize) return logics is
-    variable result: logics(arr'range);
-  begin
-    if arr'length = 1 and amount > 0 then
-      if arr'ascending = true then
-        return arr;
-      else
-        return "0";
-      end if;
-    end if;
+  function shift_la(v: logics; amt: usize) return logics;
 
-    result := arr;
-    -- shift right logical 'amount' times
-    for i in 1 to amount loop
-      -- provided with 'to'
-      if arr'ascending = true then
-        -- replace MSB with itself
-        result := result(arr'left+1 to arr'right) & result(arr'right to arr'right);
-      -- provided with 'downto'
-      else 
-        result := result(arr'left-1 downto arr'right) & "0";
-      end if;
-    end loop;
-
-    return result;
-  end function;
-
-
-  -- Shift-right-arithmetic
-  --
   -- This function shift a logic vector to the right while inserting the MSB
   -- from the left. It is a sticky right-shift.
   --
   -- When the logic vector's range is ascending, then this operation performs
   -- zero-fill right-shift with 0's being inserted into the LSB position.
-  function "sra"(arr: logics; amount: usize) return logics is
-    variable result: logics(arr'range);
-  begin
-    if arr'length = 1 and amount > 0 then
-      if arr'ascending = true then
-        return "0";
-      else
-        return arr;
-      end if;
-    end if;
+  function shift_ra(v: logics; amt: usize) return logics;
 
-    result := arr;
-    -- shift right logical 'amount' times
-    for i in 1 to amount loop
-      -- provided with 'to'
-      if arr'ascending = true then
-        result := "0" & result(arr'left to arr'right-1);
-      -- provided with 'downto'
-      else 
-        -- replace MSB with itself
-        result := result(arr'left downto arr'left) & result(arr'left downto arr'right+1);
-      end if;
-    end loop;
-
-    return result;
-  end function;
-
-
-  -- Rotate-right
-  --
   -- This function performs a circular rotation of a logic vector's elements.
   -- Elements are pushed off from the right side and are reinserted back to the 
   -- left side.
-  function "ror"(arr: logics; amount: usize) return logics is
-    variable result: logics(arr'range);
-  begin
-    result := arr;
+  function rotate_r(v: logics; amt: usize) return logics;
 
-    for i in 1 to amount loop
-      if arr'ascending = true then
-        result := result(arr'right to arr'right) & result(arr'left to arr'right-1);
-      else
-        result := result(arr'right downto arr'right) & result(arr'left downto arr'right+1);
-      end if;
-    end loop;
-
-    return result;
-  end function;
-
-
-  -- Rotate-left
-  --
   -- This function performs a circular rotation of a logic vector's elements.
   -- Elements are pushed off from the left side and are reinserted back to the
   -- right side.
-  function "rol"(arr: logics; amount: usize) return logics is
-    variable result: logics(arr'range);
-  begin
-    result := arr;
+  function rotate_l(v: logics; amt: usize) return logics;
 
-    for i in 1 to amount loop
-      if arr'ascending = true then
-        result := result(arr'left+1 to arr'right) & result(arr'left to arr'left);
-      else
-        result := result(arr'left-1 downto arr'right) & result(arr'left downto arr'left);
+  -- This function performs a zero-extension to the logic vector by a specifying
+  -- the total number of bits for the resulting vector.
+  --
+  -- Additional bits are filled with '0'. It is an error for the number of bits
+  -- n < len(x).
+  function extend_z(x: logics; n: usize) return logics;
+
+  -- This function performs a sign-extension to the logic vector by a specifying
+  -- the total number of bits for the resulting vector. 
+  --
+  -- Additional bits are filled with the MSB. It is an error for the amount of
+  -- bits n < len(x).
+  function extend_s(x: logics; n: usize) return logics;
+  
+
+  -- Flip functions
+  -- function compl(v: logics) return logics;
+
+  -- Extension functions
+  -- function uresize
+  -- function iresize
+
+end package;
+
+
+package body manip is
+
+  function shift_ll(v: logics; amt: usize) return logics is
+    variable result: logics(v'range);
+  begin
+    if v'length = 1 and amt > 0 then
+      return "0";
+    end if;
+
+    result := v;
+    -- shift left logical 'amt' times
+    for i in 1 to amt loop
+      -- provided with 'to'
+      if v'ascending = true then
+        result := result(v'left+1 to v'right) & "0";
+      -- provided with 'downto'
+      else 
+        result := result(v'left-1 downto v'right) & "0";
       end if;
     end loop;
 
@@ -206,18 +95,154 @@ package body manip is
   end function;
 
 
-  -- Addition
-  --
-  -- This function adds a logical bit to a logic vector. It is useful for when
-  -- a counter must increment by 1. The addition is performed in an unsigned
-  -- interpretation before being casted to logic.
-  --
-  -- This overloaded operator does not account for overflow.
-  function "+"(arr: logics; rhs: logic) return logics is
-    variable temp: logics(0 downto 0);
+  function shift_rl(v: logics; amt: usize) return logics is
+    variable result: logics(v'range);
   begin
-    temp(0) := rhs;
-    return logics(usign(arr) + resize(usign(temp), arr'length));
+    if v'length = 1 and amt > 0 then
+      return "0";
+    end if;
+
+    result := v;
+    -- shift right logical 'amt' times
+    for i in 1 to amt loop
+      -- provided with 'to'
+      if v'ascending = true then
+        result := "0" & result(v'left to v'right-1);
+      -- provided with 'downto'
+      else 
+        result := "0" & result(v'left downto v'right+1);
+      end if;
+    end loop;
+
+    return result;
+  end function;
+
+
+  function shift_la(v: logics; amt: usize) return logics is
+    variable result: logics(v'range);
+  begin
+    if v'length = 1 and amt > 0 then
+      if v'ascending = true then
+        return v;
+      else
+        return "0";
+      end if;
+    end if;
+
+    result := v;
+    -- shift right logical 'amt' times
+    for i in 1 to amt loop
+      -- provided with 'to'
+      if v'ascending = true then
+        -- replace MSB with itself
+        result := result(v'left+1 to v'right) & result(v'right to v'right);
+      -- provided with 'downto'
+      else 
+        result := result(v'left-1 downto v'right) & "0";
+      end if;
+    end loop;
+
+    return result;
+  end function;
+
+
+  function shift_ra(v: logics; amt: usize) return logics is
+    variable result: logics(v'range);
+  begin
+    if v'length = 1 and amt > 0 then
+      if v'ascending = true then
+        return "0";
+      else
+        return v;
+      end if;
+    end if;
+
+    result := v;
+    -- shift right logical 'amt' times
+    for i in 1 to amt loop
+      -- provided with 'to'
+      if v'ascending = true then
+        result := "0" & result(v'left to v'right-1);
+      -- provided with 'downto'
+      else 
+        -- replace MSB with itself
+        result := result(v'left downto v'left) & result(v'left downto v'right+1);
+      end if;
+    end loop;
+
+    return result;
+  end function;
+
+
+  function rotate_r(v: logics; amt: usize) return logics is
+    variable result: logics(v'range);
+  begin
+    result := v;
+
+    for i in 1 to amt loop
+      if v'ascending = true then
+        result := result(v'right to v'right) & result(v'left to v'right-1);
+      else
+        result := result(v'right downto v'right) & result(v'left downto v'right+1);
+      end if;
+    end loop;
+
+    return result;
+  end function;
+
+
+  function rotate_l(v: logics; amt: usize) return logics is
+    variable result: logics(v'range);
+  begin
+    result := v;
+
+    for i in 1 to amt loop
+      if v'ascending = true then
+        result := result(v'left+1 to v'right) & result(v'left to v'left);
+      else
+        result := result(v'left-1 downto v'right) & result(v'left downto v'left);
+      end if;
+    end loop;
+
+    return result;
+  end function;
+
+
+  function extend_z(x: logics; n: usize) return logics is
+    variable tmp: logics(0 downto 0);
+  begin
+    if n < x'length then
+      assert false report "MANIP.EXTEND_Z: vector truncated" severity warning;
+    end if;
+    if x'ascending = false then
+      return logics(resize(usign(x), n));
+    else
+      if n < x'length then
+        return x(x'low to x'low + n - 1);
+      else
+        tmp(0) := '0';
+        return x & logics(resize(usign(tmp), n - x'length));
+      end if;
+    end if;
+  end function;
+
+
+  function extend_s(x: logics; n: usize) return logics is
+    variable tmp: logics(0 downto 0);
+  begin
+    if n < x'length then
+      assert false report "MANIP.EXTEND_S: vector truncated" severity warning;
+    end if;
+    if x'ascending = false then
+      return logics(resize(isign(x), n));
+    else 
+      if n < x'length then
+        return x(x'low to x'low + n - 1);
+      else 
+        tmp(0) := x(x'high);
+        return x & logics(resize(isign(tmp), n - x'length));
+      end if;
+    end if;
   end function;
 
 end package body;
