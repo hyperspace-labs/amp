@@ -1,5 +1,5 @@
 -- Project: amp
--- Package: std93
+-- Package: manip
 --
 -- This package contains functions for common bit manipulations on linear
 -- vectors.
