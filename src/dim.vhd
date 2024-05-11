@@ -1,10 +1,16 @@
+-- Project: amp
+-- Package: dim
+--
+-- This package contains functions for performing operations in a dimensional
+-- space on linear (1D) arrays.
+
 library ieee;
 use ieee.std_logic_1164.all;
 
 library work;
 use work.types.all;
 
-package dimension is
+package dim is
 
   -- This function accesses a point from 1-dimensional space.
   function get1d(arr: logics; x: usize) return logic;
@@ -26,7 +32,7 @@ package dimension is
 end package;
 
 
-package body dimension is
+package body dim is
 
 
   function get1d(arr: logics; x: usize) return logic is

@@ -1,9 +1,8 @@
 [ip]
 name = "amp"
-summary = "An enhanced standard library"
+summary = "an amplified standard library"
 version = "0.1.0"
 library = "amp"
-
 
 # See more keys and their definitions at https://c-rus.github.io/orbit/reference/manifest.html
 

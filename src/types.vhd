@@ -1,3 +1,9 @@
+-- Project: amp
+-- Package: types
+--
+-- This package contains shorthand notations for the default datatypes as well
+-- extensions for common datatypes such as bytes.
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -60,28 +66,40 @@ package types is
   subtype isign is signed;
 
   -- A fixed-size array of `bool` element types.
-  type bools is array (natural range <>) of bool;
+  type bools is array(natural range<>) of bool;
 
   -- A fixed-size array of `i8` element types.
-  type i8s is array (natural range <>) of i8;
+  type i8s is array(natural range<>) of i8;
   -- A fixed-size array of `i16` element types.
-  type i16s is array (natural range <>) of i16;
+  type i16s is array(natural range<>) of i16;
   -- A fixed-size array of `i32` element types.
-  type i32s is array (natural range <>) of i32;
+  type i32s is array(natural range<>) of i32;
 
   -- A fixed-size array of `u8` element types.
-  type u8s is array (natural range <>) of u8;
+  type u8s is array(natural range<>) of u8;
   -- A fixed-size array of `u16` element types.
-  type u16s is array (natural range <>) of u16;
+  type u16s is array(natural range<>) of u16;
   -- A fixed-size array of `u32` element types.
-  type u32s is array (natural range <>) of u32;
+  type u32s is array(natural range<>) of u32;
 
   -- A fixed-size array of `isize` element types.
-  type isizes is array (natural range <>) of isize;
+  type isizes is array(natural range<>) of isize;
   -- A fixed-size array of `usize` element types.
-  type usizes is array (natural range <>) of usize;
+  type usizes is array(natural range<>) of usize;
   -- A fixed-size array of `psize` element types.
-  type psizes is array (natural range <>) of psize;
+  type psizes is array(natural range<>) of psize;
+
+  -- An unresolved fixed logic vector of length 8.
+  subtype byte is logics(7 downto 0);
+
+  -- A resolved fixed logic vector of length 8.
+  subtype rbyte is rlogics(7 downto 0);
+
+  -- A fixed-size array of `byte` element types.
+  type bytes is array(natural range<>) of byte;
+
+  -- A fixed-size array of `rbyte` element types.
+  type rbytes is array(natural range<>) of rbyte;
 
   -- A severity level type.
   subtype sevel is severity_level;

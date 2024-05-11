@@ -4,14 +4,16 @@ use ieee.numeric_std.all;
 
 library work;
 use work.types.all;
-use work.std93.all;
+use work.manip.all;
 
-entity std93_tb is
+entity manip_tb is
 end entity;
 
-architecture sim of std93_tb is
+architecture sim of manip_tb is
 
   signal s0: logic;
+
+  constant CODE: bytes(2 downto 0) := (x"FF", x"BB", x"55");
 
 begin
 
@@ -36,7 +38,7 @@ begin
     variable rs: logics(1 downto 0);
   begin
     rs := logics(resize(usign(d0), 2));
-    wait;
+    -- wait;
 
     v0 := logics(usign(v0) + usign(v1));
     -- saves 16 characters per addition and retains explicit casting

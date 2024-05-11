@@ -1,3 +1,9 @@
+-- Project: amp
+-- Package: std93
+--
+-- This package contains functions for common bit manipulations on linear
+-- vectors.
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -5,7 +11,7 @@ use ieee.numeric_std.all;
 library work;
 use work.types.all;
 
-package std93 is
+package manip is
 
   -- Shift operators
   function "sll"(arr: logics; amount: usize) return logics;
@@ -28,7 +34,7 @@ package std93 is
 
 end package;
 
-package body std93 is
+package body manip is
 
   -- Unresolved logic operators.
 
@@ -204,7 +210,9 @@ package body std93 is
   --
   -- This function adds a logical bit to a logic vector. It is useful for when
   -- a counter must increment by 1. The addition is performed in an unsigned
-  -- interpretation before being casted by to logic.
+  -- interpretation before being casted to logic.
+  --
+  -- This overloaded operator does not account for overflow.
   function "+"(arr: logics; rhs: logic) return logics is
     variable temp: logics(0 downto 0);
   begin

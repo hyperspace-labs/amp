@@ -1,7 +1,8 @@
 -- Project: amp
 -- Package: math
 --
--- This package contains helpful mathematical equations for counting bits.
+-- This package contains helpful compile-time mathematical equations for 
+-- counting bits.
 
 library ieee;
 use ieee.std_logic_1164.all;
