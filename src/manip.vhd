@@ -15,35 +15,35 @@ package manip is
 
   -- This function shifts a logic vector logically to the left while inserting 
   -- zeros from the right. It is a zero-fill left-shift.
-  function shift_ll(v: logics; amt: usize) return logics;
+  function shift_ll(x: logics; k: usize) return logics;
 
   -- This function shifts a logic vector logically to the right while inserting 
   -- zeros from the left. It is a zero-fill right-shift.
-  function shift_rl(v: logics; amt: usize) return logics;
+  function shift_rl(x: logics; k: usize) return logics;
 
   -- This function shifts a logic vector to the left while inserting zeros from
   -- the right. It is a zero-fill left-shift.
   --
   -- When the logic vector's range is ascending, then this operation performs
   -- sticky right-shift with the MSB being inserted from the right.
-  function shift_la(v: logics; amt: usize) return logics;
+  function shift_la(x: logics; k: usize) return logics;
 
   -- This function shift a logic vector to the right while inserting the MSB
   -- from the left. It is a sticky right-shift.
   --
   -- When the logic vector's range is ascending, then this operation performs
   -- zero-fill right-shift with 0's being inserted into the LSB position.
-  function shift_ra(v: logics; amt: usize) return logics;
+  function shift_ra(x: logics; k: usize) return logics;
 
   -- This function performs a circular rotation of a logic vector's elements.
   -- Elements are pushed off from the right side and are reinserted back to the 
   -- left side.
-  function rotate_r(v: logics; amt: usize) return logics;
+  function rotate_r(x: logics; k: usize) return logics;
 
   -- This function performs a circular rotation of a logic vector's elements.
   -- Elements are pushed off from the left side and are reinserted back to the
   -- right side.
-  function rotate_l(v: logics; amt: usize) return logics;
+  function rotate_l(x: logics; k: usize) return logics;
 
   -- This function performs a zero-extension to the logic vector by a specifying
   -- the total number of bits for the resulting vector.
@@ -58,36 +58,28 @@ package manip is
   -- Additional bits are filled with the MSB. It is an error for the amount of
   -- bits n < len(x).
   function extend_s(x: logics; n: usize) return logics;
-  
-
-  -- Flip functions
-  -- function compl(v: logics) return logics;
-
-  -- Extension functions
-  -- function uresize
-  -- function iresize
 
 end package;
 
 
 package body manip is
 
-  function shift_ll(v: logics; amt: usize) return logics is
-    variable result: logics(v'range);
+  function shift_ll(x: logics; k: usize) return logics is
+    variable result: logics(x'range);
   begin
-    if v'length = 1 and amt > 0 then
+    if x'length = 1 and k > 0 then
       return "0";
     end if;
 
-    result := v;
-    -- shift left logical 'amt' times
-    for i in 1 to amt loop
+    result := x;
+    -- shift left logical 'k' times
+    for i in 1 to k loop
       -- provided with 'to'
-      if v'ascending = true then
-        result := result(v'left+1 to v'right) & "0";
+      if x'ascending = true then
+        result := result(x'left+1 to x'right) & "0";
       -- provided with 'downto'
       else 
-        result := result(v'left-1 downto v'right) & "0";
+        result := result(x'left-1 downto x'right) & "0";
       end if;
     end loop;
 
@@ -95,22 +87,22 @@ package body manip is
   end function;
 
 
-  function shift_rl(v: logics; amt: usize) return logics is
-    variable result: logics(v'range);
+  function shift_rl(x: logics; k: usize) return logics is
+    variable result: logics(x'range);
   begin
-    if v'length = 1 and amt > 0 then
+    if x'length = 1 and k > 0 then
       return "0";
     end if;
 
-    result := v;
-    -- shift right logical 'amt' times
-    for i in 1 to amt loop
+    result := x;
+    -- shift right logical 'k' times
+    for i in 1 to k loop
       -- provided with 'to'
-      if v'ascending = true then
-        result := "0" & result(v'left to v'right-1);
+      if x'ascending = true then
+        result := "0" & result(x'left to x'right-1);
       -- provided with 'downto'
       else 
-        result := "0" & result(v'left downto v'right+1);
+        result := "0" & result(x'left downto x'right+1);
       end if;
     end loop;
 
@@ -118,27 +110,27 @@ package body manip is
   end function;
 
 
-  function shift_la(v: logics; amt: usize) return logics is
-    variable result: logics(v'range);
+  function shift_la(x: logics; k: usize) return logics is
+    variable result: logics(x'range);
   begin
-    if v'length = 1 and amt > 0 then
-      if v'ascending = true then
-        return v;
+    if x'length = 1 and k > 0 then
+      if x'ascending = true then
+        return x;
       else
         return "0";
       end if;
     end if;
 
-    result := v;
-    -- shift right logical 'amt' times
-    for i in 1 to amt loop
+    result := x;
+    -- shift right logical 'k' times
+    for i in 1 to k loop
       -- provided with 'to'
-      if v'ascending = true then
+      if x'ascending = true then
         -- replace MSB with itself
-        result := result(v'left+1 to v'right) & result(v'right to v'right);
+        result := result(x'left+1 to x'right) & result(x'right to x'right);
       -- provided with 'downto'
       else 
-        result := result(v'left-1 downto v'right) & "0";
+        result := result(x'left-1 downto x'right) & "0";
       end if;
     end loop;
 
@@ -146,27 +138,27 @@ package body manip is
   end function;
 
 
-  function shift_ra(v: logics; amt: usize) return logics is
-    variable result: logics(v'range);
+  function shift_ra(x: logics; k: usize) return logics is
+    variable result: logics(x'range);
   begin
-    if v'length = 1 and amt > 0 then
-      if v'ascending = true then
+    if x'length = 1 and k > 0 then
+      if x'ascending = true then
         return "0";
       else
-        return v;
+        return x;
       end if;
     end if;
 
-    result := v;
-    -- shift right logical 'amt' times
-    for i in 1 to amt loop
+    result := x;
+    -- shift right logical 'k' times
+    for i in 1 to k loop
       -- provided with 'to'
-      if v'ascending = true then
-        result := "0" & result(v'left to v'right-1);
+      if x'ascending = true then
+        result := "0" & result(x'left to x'right-1);
       -- provided with 'downto'
       else 
         -- replace MSB with itself
-        result := result(v'left downto v'left) & result(v'left downto v'right+1);
+        result := result(x'left downto x'left) & result(x'left downto x'right+1);
       end if;
     end loop;
 
@@ -174,16 +166,16 @@ package body manip is
   end function;
 
 
-  function rotate_r(v: logics; amt: usize) return logics is
-    variable result: logics(v'range);
+  function rotate_r(x: logics; k: usize) return logics is
+    variable result: logics(x'range);
   begin
-    result := v;
+    result := x;
 
-    for i in 1 to amt loop
-      if v'ascending = true then
-        result := result(v'right to v'right) & result(v'left to v'right-1);
+    for i in 1 to k loop
+      if x'ascending = true then
+        result := result(x'right to x'right) & result(x'left to x'right-1);
       else
-        result := result(v'right downto v'right) & result(v'left downto v'right+1);
+        result := result(x'right downto x'right) & result(x'left downto x'right+1);
       end if;
     end loop;
 
@@ -191,16 +183,16 @@ package body manip is
   end function;
 
 
-  function rotate_l(v: logics; amt: usize) return logics is
-    variable result: logics(v'range);
+  function rotate_l(x: logics; k: usize) return logics is
+    variable result: logics(x'range);
   begin
-    result := v;
+    result := x;
 
-    for i in 1 to amt loop
-      if v'ascending = true then
-        result := result(v'left+1 to v'right) & result(v'left to v'left);
+    for i in 1 to k loop
+      if x'ascending = true then
+        result := result(x'left+1 to x'right) & result(x'left to x'left);
       else
-        result := result(v'left-1 downto v'right) & result(v'left downto v'left);
+        result := result(x'left-1 downto x'right) & result(x'left downto x'left);
       end if;
     end loop;
 

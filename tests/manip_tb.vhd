@@ -56,6 +56,7 @@ begin
     v0 := logics(usign(v0) + usign(v1));
     -- saves 16 characters per addition and retains explicit casting
     -- v0 := std_logic_vector(unsigned(v0) + unsigned(v1));
+    
     report logic'image(v0(0));
     -- v0 := logics(usign(v0) + '1');
 
@@ -260,7 +261,7 @@ begin
     assert u0 = "1001";
 
     wait for 0 ns;
-    report isize'image(to_integer(usign(k0_comp)));
+    report int'image(to_int(usign(k0_comp)));
 
     report "Testing extension functions (downto)...";
 
