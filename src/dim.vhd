@@ -13,23 +13,9 @@ use work.cast.all;
 
 package dim is
 
-  -- Computes the index for accessing a point in a 1-dimensional space for a linear
-  -- vector.
-  --
-  -- Assumes the space is X.
-  function index_1d(x: usize) return usize;
+  function index_sub(axes: psizes; indices: usizes) return usize;
 
-  -- Computes the index for accessing a point in a 2-dimensional space for a linear
-  -- vector.
-  -- 
-  -- Assumes the space is X * Y.
-  function index_2d(x: usize; y: usize; x_len: psize) return usize;
-
-  -- Computes the index for accessing a point in a 3-dimensional space for a linear
-  -- vector.
-  --
-  -- Assumes the space is X * Y * Z.
-  function index_3d(x: usize; y: usize; z: usize; x_len: psize; y_len: psize) return usize;
+  function index_sub(axis: psize; index: usize) return usize;
 
   -- Returns a subspace of len(`v_slice`) at index `i` of the entire space `v_array`.
   -- 
@@ -43,17 +29,6 @@ package dim is
   -- This function can be interpreted as returning the n-dimensional array after
   -- modifying the (n-1)-dimensional slice at index `i` with the value of `v_slice`.
   function set_slice(v_array: logics; v_slice: logics; i: usize; offset: usize := 0) return logics;
-
-  -- refactor below --
-
-  -- This function accesses a point from 1-dimensional space.
-  function get1d(arr: logics; x: usize) return logic;
-
-  -- This function accesses a point from 2-dimensional space.
-  function get2d(arr: logics; x: usize; y: usize; x_max: usize) return logic;
-
-  -- This function accesses a point from 3-dimensional space.
-  function get3d(arr: logics; x: usize; y: usize; z: usize; x_max: usize; y_max: usize) return logic;
 
 end package;
 
@@ -86,21 +61,38 @@ package body dim is
   end function;
 
 
-  function index_1d(x: usize) return usize is
+  function index_sub(axes: psizes; indices: usizes) return usize is 
+    variable result: usize := 0;
+    variable jump: usize := 1;
+    variable len: usize := axes'length;
   begin
-    return x;
+    if axes'length /= indices'length then
+      report "DIM.INDEX_SUB: vectors for slice lengths and indices do not match" severity warning;
+    end if;
+    result := jump * indices(len-1);
+    if indices(len-1) >= axes(len-1) then
+      report "DIM.INDEX_SUB: index at dimension " & int'image(len) & " is out of bounds" severity warning;
+    end if;
+    for k in len-2 downto 0 loop
+      jump := jump * axes(k+1);
+      result := result + (jump * indices(k));
+      if indices(k) >= axes(k) then
+        report "DIM.INDEX_SUB: index at dimension " & int'image(k+1) & " is out of bounds" severity warning;
+      end if;
+    end loop;
+    if result > jump * axes(0) then
+      report "DIM.INDEX_SUB: index out of bounds" severity warning;
+    end if;
+    return result;
   end function;
 
 
-  function index_2d(x: usize; y: usize; x_len: psize) return usize is
+  function index_sub(axis: psize; index: usize) return usize is
   begin
-    return (x_len * y) + x;
-  end function;
-
-
-  function index_3d(x: usize; y: usize; z: usize; x_len: psize; y_len: psize) return usize is
-  begin
-    return (x_len * y_len * z) + (x_len * y) + x;
+    if index > axis then
+      report "DIM.INDEX_SUB: index out of bounds" severity warning;
+    end if;
+    return index;
   end function;
 
 
@@ -116,24 +108,5 @@ package body dim is
   --   end if;
   --   return arr((x_max * (y + 1)) - 1 + shift downto (x_max * y) + shift);
   -- end function;
-
-  -- everything below to be refactored --
-
-  function get1d(arr: logics; x: usize) return logic is
-  begin
-    return arr(x);
-  end function;
-
-
-  function get2d(arr: logics; x: usize; y: usize; x_max: usize) return logic is
-  begin
-    return arr((x_max * y) + x);
-  end function;
-
-
-  function get3d(arr: logics; x: usize; y: usize; z: usize; x_max: usize; y_max: usize) return logic is
-  begin
-    return arr((x_max * y_max * z) + (x_max * y) + x);
-  end function;
 
 end package body;

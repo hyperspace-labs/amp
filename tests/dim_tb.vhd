@@ -33,7 +33,7 @@ architecture sim of dim_tb is
   signal a1d_payload: logics(A_LEN-1 downto 0) := "11";
 
   constant idx_b: usize := 2;
-  constant idx_c: usize := 0;
+  constant idx_c: usize := 1;
 
 begin
 
@@ -43,7 +43,7 @@ begin
   -- modifying a 1-dimensional subslice in a 3-dimensional array
   g3d <= set_slice(g3d, set_slice(get_slice(g3d, b2d, idx_c), a1d_payload, idx_b), idx_c);
 
-  line0(index_1d(2)) <= '0';
+  line0(index_sub(4, 2)) <= '0';
 
   uut: entity work.pseudo
     port map(
@@ -60,16 +60,22 @@ begin
     
     variable row: logics(X_LEN-1 downto 0);
     variable col: logics(Y_LEN-1 downto 0);
+
+
+    variable cd2: usize := index_sub((B_LEN, A_LEN), (3, 1));
+    variable cs2: usize := index_sub((B_LEN, A_LEN), (3, 1));
+
+    variable see_3d: usize := index_sub((C_LEN, B_LEN, A_LEN), (1, 2, 0));
   begin
 
     row := get_slice(grid, row, 0);
     -- col := get2d1d(grid, 4, Y_LEN);
     row(0) := '1';
 
-    row(index_1d(0)) := '0';
-    report logic'image(row(index_1d(0)));
+    row(index_sub(row'length, 0)) := '0';
+    report logic'image(row(index_sub(row'length, 0)));
 
-    report logic'image(line0(index_1d(2)));
+    report logic'image(line0(index_sub(line0'length, 2)));
 
     wait for 0 ns;
 
@@ -77,6 +83,9 @@ begin
     report to_str(get_slice(g0, a0, 1));
 
     report "g3d: " & to_str(g3d);
+
+    report "indices: " & int'image(cd2) & " " & int'image(cs2);
+    report logic'image(g3d(see_3d));
     wait;
   end process;
 
