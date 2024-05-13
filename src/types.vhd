@@ -46,6 +46,10 @@ package types is
 
   -- Another naming notation for compiler-sized signed integer type.
   subtype int is integer;
+  -- Another naming notation for compiler-sized unsigned integer type.
+  subtype nal is natural;
+  -- Another naming notation for compiler-sized positive integer type.
+  subtype pve is positive;
 
   -- A fixed-size array of `char` element types.
   subtype str is string;

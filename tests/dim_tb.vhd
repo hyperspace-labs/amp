@@ -25,7 +25,7 @@ architecture sim of dim_tb is
 
 begin
 
-  g0 <= set_2d1d(g0, a0, 1);
+  g0 <= set_slice(g0, a0, 1);
 
   line0(index_1d(2)) <= '0';
 
@@ -46,7 +46,7 @@ begin
     variable col: logics(Y_LEN-1 downto 0);
   begin
 
-    row := get_2d1d(grid, row, 0);
+    row := get_slice(grid, row, 0);
     -- col := get2d1d(grid, 4, Y_LEN);
     row(0) := '1';
 
@@ -58,7 +58,7 @@ begin
     wait for 0 ns;
 
     report to_str(g0);
-    report to_str(get_2d1d(g0, a0, 1));
+    report to_str(get_slice(g0, a0, 1));
     wait;
   end process;
 
