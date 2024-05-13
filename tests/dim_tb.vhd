@@ -23,9 +23,25 @@ architecture sim of dim_tb is
 
   signal a0: logics(A_LEN-1 downto 0) := "11";
 
+  constant C_LEN: usize := 2;
+
+  signal g3d: logics(A_LEN*B_LEN*C_LEN-1 downto 0) := (others => '0');
+
+  signal b2d: logics(A_LEN*B_LEN-1 downto 0);
+  signal a1d: logics(A_LEN-1 downto 0);
+
+  signal a1d_payload: logics(A_LEN-1 downto 0) := "11";
+
+  constant idx_b: usize := 2;
+  constant idx_c: usize := 0;
+
 begin
 
+  -- modifying a 1-dimensional subslice in a 2-dimensional array
   g0 <= set_slice(g0, a0, 1);
+
+  -- modifying a 1-dimensional subslice in a 3-dimensional array
+  g3d <= set_slice(g3d, set_slice(get_slice(g3d, b2d, idx_c), a1d_payload, idx_b), idx_c);
 
   line0(index_1d(2)) <= '0';
 
@@ -59,6 +75,8 @@ begin
 
     report to_str(g0);
     report to_str(get_slice(g0, a0, 1));
+
+    report "g3d: " & to_str(g3d);
     wait;
   end process;
 

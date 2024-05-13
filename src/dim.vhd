@@ -67,7 +67,6 @@ package body dim is
     if v_array'ascending = true then
       return v_array((i*len_slice)+shift to ((i+1)*len_slice)-1+shift);
     else
-      report to_str(v_array);
       return v_array(((i+1)*len_slice)-1+shift downto (i*len_slice)+shift);
     end if;
   end function;
