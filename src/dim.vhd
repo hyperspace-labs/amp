@@ -9,13 +9,8 @@ use ieee.std_logic_1164.all;
 
 library work;
 use work.types.all;
-use work.cast.all;
 
 package dim is
-
-  function index_sub(axes: psizes; indices: usizes) return usize;
-
-  function index_sub(axis: psize; index: usize) return usize;
 
   -- Returns a subspace of len(`v_slice`) at index `i` of the entire space `v_array`.
   -- 
@@ -29,6 +24,10 @@ package dim is
   -- This function can be interpreted as returning the n-dimensional array after
   -- modifying the (n-1)-dimensional slice at index `i` with the value of `v_slice`.
   function set_slice(v_array: logics; v_slice: logics; i: usize; offset: usize := 0) return logics;
+
+  function index_sub(axes: psizes; indices: usizes) return usize;
+
+  function index_sub(axis: psize; index: usize) return usize;
 
 end package;
 
