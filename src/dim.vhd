@@ -25,9 +25,13 @@ package dim is
   -- modifying the (n-1)-dimensional slice at index `i` with the value of `v_slice`.
   function set_slice(v_array: logics; v_slice: logics; i: usize; offset: usize := 0) return logics;
 
-  function index_sub(axes: psizes; indices: usizes) return usize;
-
-  function index_sub(axis: psize; index: usize) return usize;
+  -- Returns the index to a point in the multi-dimensional space defined by lengths defined
+  -- in `axes` and by positions defined in `indices`.
+  --
+  -- Each element in the corresponding lists should be ordered from highest
+  -- dimensions to lowest dimension. For example, for a 3-dimensional space
+  -- defined by X, Y, and Z, the order is (Z, Y, X).
+  function index_space(axes: psizes; indices: usizes) return usize;
 
 end package;
 
@@ -60,52 +64,29 @@ package body dim is
   end function;
 
 
-  function index_sub(axes: psizes; indices: usizes) return usize is 
+  function index_space(axes: psizes; indices: usizes) return usize is 
     variable result: usize := 0;
     variable jump: usize := 1;
     variable len: usize := axes'length;
   begin
     if axes'length /= indices'length then
-      report "DIM.INDEX_SUB: vectors for slice lengths and indices do not match" severity warning;
+      report "DIM.INDEX_SPACE: vectors for slice lengths and indices do not match" severity warning;
     end if;
     result := jump * indices(len-1);
     if indices(len-1) >= axes(len-1) then
-      report "DIM.INDEX_SUB: index at dimension " & int'image(len) & " is out of bounds" severity warning;
+      report "DIM.INDEX_SPACE: index at dimension " & int'image(len) & " is out of bounds" severity warning;
     end if;
     for k in len-2 downto 0 loop
       jump := jump * axes(k+1);
       result := result + (jump * indices(k));
       if indices(k) >= axes(k) then
-        report "DIM.INDEX_SUB: index at dimension " & int'image(k+1) & " is out of bounds" severity warning;
+        report "DIM.INDEX_SPACE: index at dimension " & int'image(k+1) & " is out of bounds" severity warning;
       end if;
     end loop;
     if result > jump * axes(0) then
-      report "DIM.INDEX_SUB: index out of bounds" severity warning;
+      report "DIM.INDEX_SPACE: index out of bounds" severity warning;
     end if;
     return result;
   end function;
-
-
-  function index_sub(axis: psize; index: usize) return usize is
-  begin
-    if index > axis then
-      report "DIM.INDEX_SUB: index out of bounds" severity warning;
-    end if;
-    return index;
-  end function;
-
-
-  -- function index_2d1d(y: usize; x_len: usize; offset: usize := 0) return voids is
-  --   variable shift: usize := offset;
-  --   variable sect: voids(((y+1)*x_len)-1+shift downto (y*x_len)+shift);
-  -- begin
-  --   return sect;
-  -- end function;
-  -- begin
-  --   if arr'ascending = true then
-  --     return arr((x_max * y) + shift to (x_max * (y + 1)) - 1 + shift);
-  --   end if;
-  --   return arr((x_max * (y + 1)) - 1 + shift downto (x_max * y) + shift);
-  -- end function;
 
 end package body;
