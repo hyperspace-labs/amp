@@ -123,6 +123,9 @@ package prelude is
   -- Casts a logic bit to a string.
   function to_str(b: logic) return str;
 
+  -- Casts an integer to a string.
+  function to_str(k: int) return str;
+
   -- Casts a character to a logic bit.
   function to_logic(c: char) return logic;
 
@@ -292,6 +295,12 @@ package body prelude is
       word(1) := '?';
     end if;
     return word;
+  end function;
+
+
+  function to_str(k: int) return str is
+  begin
+    return int'image(k);
   end function;
 
 
