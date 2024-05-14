@@ -8,6 +8,9 @@ entity types_tb is
 end entity;
 
 architecture sim of types_tb is
+  
+  constant CODE: bytes(2 downto 0) := (x"FF", x"BB", x"55");
+
 begin
 
   uut: entity work.pseudo

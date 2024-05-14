@@ -229,7 +229,9 @@ package body manip is
       return logics(resize(isign(x), n));
     else 
       if n < x'length then
-        return x(x'low to x'low + n - 1);
+        -- replace the MSB with the MSB of the untruncated vector
+        tmp(0) := x(x'high);
+        return x(x'low to x'low + n - 2) & tmp(0);
       else 
         tmp(0) := x(x'high);
         return x & logics(resize(isign(tmp), n - x'length));

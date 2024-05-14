@@ -11,24 +11,14 @@ entity manip_tb is
 end entity;
 
 architecture sim of manip_tb is
-
-  signal s0: logic;
-
-  constant CODE: bytes(2 downto 0) := (x"FF", x"BB", x"55");
-
-  signal k0: logics(1 downto 0) := "01";
-  signal k0_comp: logics(1 downto 0);
-
 begin
-
-  k0_comp <= not k0;
 
   uut: entity work.pseudo
     port map(
       active => open
     );
 
-  c1: process
+  check: process
     variable v0: logics(3 downto 0) := (others => '0');
     variable v1: logics(3 downto 0) := "0001";
 
@@ -57,26 +47,24 @@ begin
     -- saves 16 characters per addition and retains explicit casting
     -- v0 := std_logic_vector(unsigned(v0) + unsigned(v1));
     
-    report logic'image(v0(0));
+    -- report logic'image(v0(0));
+    assert v0(0) = '1' severity error;
     -- v0 := logics(usign(v0) + '1');
 
     r0 := rlogics(usign(r0) - usign(r1));
-    report rlogic'image(r0(0));
+    -- report rlogic'image(r0(0));
+    assert r0(0) = '1' severity error;
 
     v0 := "0001";
     v0 := shift_ll(v0, 1);
-    report "v0(1) = " & logic'image(v0(1));
+    assert v0(1) = '1' report "v0(1) = " & logic'image(v0(1)) severity error;
     v0 := shift_rl(v0, 1);
-    report "v0(1) = " & logic'image(v0(1));
+    assert v0(1) = '0' report "v0(1) = " & logic'image(v0(1)) severity error;
     
     v0 := "0010";
     v0 := rotate_r(v0, 1);
 
-    if v0 = "0001" then
-      report "yes";
-    else
-      report "no";
-    end if;
+    assert v0 = "0001" severity error;
 
     report "Testing logical shift operators...";
 
@@ -260,38 +248,39 @@ begin
     u0 := rotate_l(u0, 5);
     assert u0 = "1001";
 
-    wait for 0 ns;
-    report int'image(to_int(usign(k0_comp)));
-
     report "Testing extension functions (downto)...";
 
     d0 := "1100";
     d0_trunc := extend_z(d0, d0_trunc'length);
-    report to_str(d0_trunc);
+    assert d0_trunc = "00" report to_str(d0_trunc) severity error;
 
     d0_exten := extend_z(d0, d0_exten'length);
-    report to_str(d0_exten);
+    assert d0_exten = "001100" report to_str(d0_exten) severity error;
 
     d0_trunc := extend_s(d0, d0_trunc'length);
-    report to_str(d0_trunc);
+    assert d0_trunc = "10" report to_str(d0_trunc) severity error;
 
     d0_exten := extend_s(d0, d0_exten'length);
-    report to_str(d0_exten);
+    assert d0_exten  ="111100" report to_str(d0_exten) severity error;
+
+    d0 := "1001";
+    d0_trunc := extend_s(d0, d0_trunc'length);
+    assert d0_trunc = "11" report to_str(d0_trunc) severity error;
 
     report "Testing extension functions (to)...";
 
     u0 := "1001";
     u0_trunc := extend_z(u0, u0_trunc'length);
-    report to_str(u0_trunc);
+    assert u0_trunc = "10" report to_str(u0_trunc) severity error;
 
     u0_exten := extend_z(u0, u0_exten'length);
-    report to_str(u0_exten);
+    assert u0_exten = "100100" report to_str(u0_exten) severity error;
 
     u0_trunc := extend_s(u0, u0_trunc'length);
-    report to_str(u0_trunc);
+    assert u0_trunc = "11" report to_str(u0_trunc) severity error;
 
     u0_exten := extend_s(u0, u0_exten'length);
-    report to_str(u0_exten);
+    assert u0_exten = "100111" report to_str(u0_exten) severity error;
 
     wait;
   end process;
