@@ -23,6 +23,10 @@ jobs:
           pip install -r "$(orbit env ORBIT_HOME)/profiles/cdotrus/requirements.txt"
           orbit config --append include="profiles/cdotrus/config.toml"
 
+      - name: Verify prelude package has latest changes
+        run: |
+          python ./scripts/prelude.py
+
       - name: Perform static analysis
         run: |
           orbit plan --clean --plugin gsim --all

@@ -12,48 +12,48 @@ use work.types.all;
 
 package math is    
 
-    -- This function computes the logarithmic (base 2) for `k` and takes the 
-    -- ceiling of the result. It effectively determines the minimum number of 
-    -- bits required to represent `k` possible values of a space.
-    --
-    -- Equation: ceil(log2(k))
-    function clog2(k: usize) return usize;
+  -- This function computes the logarithmic (base 2) for `k` and takes the 
+  -- ceiling of the result. It effectively determines the minimum number of 
+  -- bits required to represent `k` possible values of a space.
+  --
+  -- Equation: ceil(log2(k))
+  function clog2(k: usize) return usize;
 
-    -- This function determines the minimum number of bits required to represent 
-    -- the `k` as a decimal number in standard binary representation.
-    --
-    -- Equation: floor(log2(k) + 1)
-    function flog2p1(k: usize) return usize;
+  -- This function determines the minimum number of bits required to represent 
+  -- the `k` as a decimal number in standard binary representation.
+  --
+  -- Equation: floor(log2(k) + 1)
+  function flog2p1(k: usize) return usize;
 
-    -- This function computes 2 raised to the `k` power.
-    -- 
-    -- It effectively determines the maximum number of possible values of a
-    -- space represented in binary for a vector with `k` width.
-    function pow2(k: usize) return usize;
+  -- This function computes 2 raised to the `k` power.
+  -- 
+  -- It effectively determines the maximum number of possible values of a
+  -- space represented in binary for a vector with `k` width.
+  function pow2(k: usize) return usize;
 
-    -- This function computes 2 raised to the `k` minus 1 power.
-    -- 
-    -- It effectively determines the maximum number represented in binary for a 
-    -- vector with `k` width.
-    function pow2m1(k: usize) return usize;
+  -- This function computes 2 raised to the `k` minus 1 power.
+  -- 
+  -- It effectively determines the maximum number represented in binary for a 
+  -- vector with `k` width.
+  function pow2m1(k: usize) return usize;
 
-    -- This function checks if `k` is a power of 2.
-    --
-    -- A number is a power of 2 when its binary represetnation has exactly 1 bit 
-    -- set to 1.
-    function is_pow2(k: usize) return bool;
+  -- This function checks if `k` is a power of 2.
+  --
+  -- A number is a power of 2 when its binary represetnation has exactly 1 bit 
+  -- set to 1.
+  function is_pow2(k: usize) return bool;
 
-    -- Computes the minimum number of bits required to represent `k` possible
-    -- values in a set.
-    --
-    -- Internally, this function uses `clog2(...)`.
-    function len_bits_enum(k: usize) return usize;
+  -- Computes the minimum number of bits required to represent `k` possible
+  -- values in a set.
+  --
+  -- Internally, this function uses `clog2(...)`.
+  function len_bits_enum(k: usize) return usize;
 
-    -- Computes the minimum number of bits required to represent the decimal
-    -- number `k` in standard binary notation.
-    --
-    -- Internally, this function uses `flog2p1(...)`.
-    function len_bits_repr(k: usize) return usize;
+  -- Computes the minimum number of bits required to represent the decimal
+  -- number `k` in standard binary notation.
+  --
+  -- Internally, this function uses `flog2p1(...)`.
+  function len_bits_repr(k: usize) return usize;
 
 end package;
 
