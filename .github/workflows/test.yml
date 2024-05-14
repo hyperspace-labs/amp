@@ -25,10 +25,21 @@ jobs:
 
       - name: Perform static analysis
         run: |
-            orbit plan --clean --plugin gsim --all
-            orbit b -- --lint
+          orbit plan --clean --plugin gsim --all
+          orbit b -- --lint --std=93
+          orbit b -- --lint --std=02
+          orbit b -- --lint --std=08
+
+      - name: Test types package
+        run: |
+          orbit plan --clean --plugin gsim --bench types_tb
+          orbit b -- --std=93
+          orbit b -- --std=02
+          orbit b -- --std=08
 
       - name: Test math package
         run: |
           orbit plan --clean --plugin gsim --bench math_tb
-          orbit b --
+          orbit b -- --std=93
+          orbit b -- --std=02
+          orbit b -- --std=08

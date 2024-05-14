@@ -1,6 +1,10 @@
 # `amp`
 
+[![test](https://github.com/hyperspace-labs/amp/actions/workflows/test.yml/badge.svg)](https://github.com/hyperspace-labs/amp/actions/workflows/test.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A standard library for VHDL - ___amplified___.
+
+This package is tested with the IEEE standard for VHDL 93, 02, and 08.
 
 ## Packages
 
