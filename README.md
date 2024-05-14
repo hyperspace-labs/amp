@@ -10,13 +10,13 @@ This package is tested with the IEEE standard for VHDL 93, 02, and 08.
 
 Common functionality is grouped together within packages. However, if designs are frequently requiring many of `amp`'s packages, then using the `prelude` package will import all functionality from the packages enabled under the __Prelude__ column in the following table.
 
-Name | Description | Prelude
+Name | Description | Included in `prelude`?
 -- | -- | --
-`types` | Improved type names and additional types | [x] 
-`manip` | Bit manipulation operations | [x] 
-`math` | Compile-time arithmetic functions | [x] 
-`dim` | Functions for interpreting linear vectors in multi-dimensional space | [x]
-`cast` | Convenient conversions between types | [x] 
+`types` | Improved type names and additional types | ✔
+`manip` | Bit manipulation operations | ✔ 
+`math` | Compile-time arithmetic functions | ✔ 
+`dim` | Functions for interpreting linear vectors in multi-dimensional space | ✔
+`cast` | Convenient conversions between types | ✔
 
 ## Project Goals
 
