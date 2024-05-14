@@ -38,6 +38,9 @@ package math is
     function pow2m1(k: usize) return usize;
 
     -- This function checks if `k` is a power of 2.
+    --
+    -- A number is a power of 2 when its binary represetnation has exactly 1 bit 
+    -- set to 1.
     function is_pow2(k: usize) return bool;
 
     -- Computes the minimum number of bits required to represent `k` possible
@@ -120,6 +123,9 @@ package body math is
   function is_pow2(k: usize) return bool is
     variable temp: usize;
   begin
+    if k = 0 then
+      return false;
+    end if;
     temp := k;
     while temp > 2 loop 
       if temp rem 2 /= 0 and temp > 2 then

@@ -65,16 +65,14 @@ begin
     variable cd2: usize := index_space((B_LEN, A_LEN), (3, 1));
     variable cs2: usize := index_space((B_LEN, A_LEN), (3, 1));
 
-    variable see_3d: usize := index_space((C_LEN, B_LEN, A_LEN), (1, 2, 0));
+   -- variable see_3d: usize := index_space((C_LEN, B_LEN, A_LEN), (1, 2, 0));
   begin
 
     row := get_slice(grid, row, 0);
     -- col := get2d1d(grid, 4, Y_LEN);
     col(2) := '1';
-
     col(0) := '0';
-    report logic'image(col(2)) & logic'image(col(index_space((col'length), (2))));
-
+    report logic'image(col(2));
     report logic'image(line0(2));
 
     wait for 0 ns;
@@ -86,7 +84,7 @@ begin
 
     report "indices: " & int'image(cd2) & " " & int'image(cs2);
 
-    report logic'image(g3d(see_3d));
+    report logic'image(g3d(index_space((C_LEN, B_LEN, A_LEN), (1, 2, 0))));
     wait;
   end process;
 

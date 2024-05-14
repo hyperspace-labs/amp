@@ -3,3 +3,5 @@
 /justfile
 /run.sh
 /.orbit
+
+__pycache__

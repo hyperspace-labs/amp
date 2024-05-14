@@ -1,0 +1,34 @@
+name: test
+on:
+  push:
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    container:
+        image: cdotrus/groovy-guitar
+    steps:
+      - name: Fetch repository
+        uses: actions/checkout@v3
+
+      - name: Log all tool versions
+        run: |
+          orbit --version  
+          python --version
+          ghdl --version
+        
+      - name: Configure orbit profile
+        run: |
+          git clone https://github.com/cdotrus/orbit-profile.git "$(orbit env ORBIT_HOME)/profiles/cdotrus"
+          pip install -r "$(orbit env ORBIT_HOME)/profiles/cdotrus/requirements.txt"
+          orbit config --append include="profiles/cdotrus/config.toml"
+
+      - name: Perform static analysis
+        run: |
+            orbit plan --clean --plugin gsim --all
+            orbit b -- --lint
+
+      - name: Test math package
+        run: |
+          orbit plan --clean --plugin gsim --bench math_tb
+          orbit b --
