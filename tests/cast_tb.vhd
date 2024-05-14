@@ -20,9 +20,18 @@ begin
       active => open
     );
 
-  c1: process
+  check: process
     variable vv0: logics(3 downto 0) := "0W-0";
+
+    constant c_p: psize := 10;
+    constant c_u: usize := 0;
+    constant c_i: isize := -14;
+
   begin
+    assert to_str(c_p) = "10" severity error;
+    assert to_str(c_u) = "0" severity error;
+    assert to_str(c_i) = "-14" severity error;
+    
     report to_str(v0);
     report to_str(b0);
     report int'image(to_int(isign(v0)));
