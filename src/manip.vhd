@@ -15,56 +15,56 @@ package manip is
 
   -- This function shifts a logic vector logically to the left while inserting 
   -- zeros from the right. It is a zero-fill left-shift.
-  function shift_ll(x: logics; k: usize) return logics;
+  function shift_left_logic(x: logics; k: usize) return logics;
 
   -- This function shifts a logic vector logically to the right while inserting 
   -- zeros from the left. It is a zero-fill right-shift.
-  function shift_rl(x: logics; k: usize) return logics;
+  function shift_right_logic(x: logics; k: usize) return logics;
 
   -- This function shifts a logic vector to the left while inserting zeros from
   -- the right. It is a zero-fill left-shift.
   --
   -- When the logic vector's range is ascending, then this operation performs
   -- sticky right-shift with the MSB being inserted from the right.
-  function shift_la(x: logics; k: usize) return logics;
+  function shift_left_arith(x: logics; k: usize) return logics;
 
   -- This function shift a logic vector to the right while inserting the MSB
   -- from the left. It is a sticky right-shift.
   --
   -- When the logic vector's range is ascending, then this operation performs
   -- zero-fill right-shift with 0's being inserted into the LSB position.
-  function shift_ra(x: logics; k: usize) return logics;
+  function shift_right_arith(x: logics; k: usize) return logics;
 
   -- This function performs a circular rotation of a logic vector's elements.
   -- Elements are pushed off from the right side and are reinserted back to the 
   -- left side.
-  function rotate_r(x: logics; k: usize) return logics;
+  function rotate_right(x: logics; k: usize) return logics;
 
   -- This function performs a circular rotation of a logic vector's elements.
   -- Elements are pushed off from the left side and are reinserted back to the
   -- right side.
-  function rotate_l(x: logics; k: usize) return logics;
+  function rotate_left(x: logics; k: usize) return logics;
 
   -- This function performs a zero-extension to the logic vector by a specifying
   -- the total number of bits for the resulting vector.
   --
   -- Additional bits are filled with '0'. It is an error for the number of bits
   -- n < len(x).
-  function extend_z(x: logics; n: usize) return logics;
+  function extend_zero(x: logics; n: usize) return logics;
 
   -- This function performs a sign-extension to the logic vector by a specifying
   -- the total number of bits for the resulting vector. 
   --
   -- Additional bits are filled with the MSB. It is an error for the amount of
   -- bits n < len(x).
-  function extend_s(x: logics; n: usize) return logics;
+  function extend_sign(x: logics; n: usize) return logics;
 
 end package;
 
 
 package body manip is
 
-  function shift_ll(x: logics; k: usize) return logics is
+  function shift_left_logic(x: logics; k: usize) return logics is
     variable result: logics(x'range);
   begin
     if x'length = 1 and k > 0 then
@@ -87,7 +87,7 @@ package body manip is
   end function;
 
 
-  function shift_rl(x: logics; k: usize) return logics is
+  function shift_right_logic(x: logics; k: usize) return logics is
     variable result: logics(x'range);
   begin
     if x'length = 1 and k > 0 then
@@ -110,7 +110,7 @@ package body manip is
   end function;
 
 
-  function shift_la(x: logics; k: usize) return logics is
+  function shift_left_arith(x: logics; k: usize) return logics is
     variable result: logics(x'range);
   begin
     if x'length = 1 and k > 0 then
@@ -138,7 +138,7 @@ package body manip is
   end function;
 
 
-  function shift_ra(x: logics; k: usize) return logics is
+  function shift_right_arith(x: logics; k: usize) return logics is
     variable result: logics(x'range);
   begin
     if x'length = 1 and k > 0 then
@@ -166,7 +166,7 @@ package body manip is
   end function;
 
 
-  function rotate_r(x: logics; k: usize) return logics is
+  function rotate_right(x: logics; k: usize) return logics is
     variable result: logics(x'range);
   begin
     result := x;
@@ -183,7 +183,7 @@ package body manip is
   end function;
 
 
-  function rotate_l(x: logics; k: usize) return logics is
+  function rotate_left(x: logics; k: usize) return logics is
     variable result: logics(x'range);
   begin
     result := x;
@@ -200,11 +200,11 @@ package body manip is
   end function;
 
 
-  function extend_z(x: logics; n: usize) return logics is
+  function extend_zero(x: logics; n: usize) return logics is
     variable tmp: logics(0 downto 0);
   begin
     if n < x'length then
-      assert false report "MANIP.EXTEND_Z: vector truncated" severity warning;
+      assert false report "MANIP.EXTEND_ZERO: vector truncated" severity warning;
     end if;
     if x'ascending = false then
       return logics(resize(usign(x), n));
@@ -219,11 +219,11 @@ package body manip is
   end function;
 
 
-  function extend_s(x: logics; n: usize) return logics is
+  function extend_sign(x: logics; n: usize) return logics is
     variable tmp: logics(0 downto 0);
   begin
     if n < x'length then
-      assert false report "MANIP.EXTEND_S: vector truncated" severity warning;
+      assert false report "MANIP.EXTEND_SIGN: vector truncated" severity warning;
     end if;
     if x'ascending = false then
       return logics(resize(isign(x), n));

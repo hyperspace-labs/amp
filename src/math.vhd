@@ -27,14 +27,14 @@ package math is
 
   -- This function computes 2 raised to the `k` power.
   -- 
-  -- It effectively determines the maximum number of possible values of a
-  -- space represented in binary for a vector with `k` width.
+  -- It effectively determines the maximum number of values available for `k`
+  -- bits.
   function pow2(k: usize) return usize;
 
   -- This function computes 2 raised to the `k` minus 1 power.
   -- 
-  -- It effectively determines the maximum number represented in binary for a 
-  -- vector with `k` width.
+  -- It effectively determines the maximum unsigned number represented in binary 
+  -- for `k` bits.
   function pow2m1(k: usize) return usize;
 
   -- This function checks if `k` is a power of 2.

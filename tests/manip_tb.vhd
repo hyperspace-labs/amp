@@ -56,126 +56,126 @@ begin
     assert r0(0) = '1' severity error;
 
     v0 := "0001";
-    v0 := shift_ll(v0, 1);
+    v0 := shift_left_logic(v0, 1);
     assert v0(1) = '1' report "v0(1) = " & logic'image(v0(1)) severity error;
-    v0 := shift_rl(v0, 1);
+    v0 := shift_right_logic(v0, 1);
     assert v0(1) = '0' report "v0(1) = " & logic'image(v0(1)) severity error;
     
     v0 := "0010";
-    v0 := rotate_r(v0, 1);
+    v0 := rotate_right(v0, 1);
 
     assert v0 = "0001" severity error;
 
     report "Testing logical shift operators...";
 
     u0 := "1010";
-    u0 := shift_rl(u0, 0);
+    u0 := shift_right_logic(u0, 0);
     assert u0 = "1010";
 
     d0 := "1010";
-    d0 := shift_ll(d0, 0);
+    d0 := shift_left_logic(d0, 0);
     assert d0 = "1010";
 
     u0 := "1010";
-    u0 := shift_ll(u0, 0);
+    u0 := shift_left_logic(u0, 0);
     assert u0 = "1010";
 
     d0 := "1000";
-    d0 := shift_rl(d0, 1);
+    d0 := shift_right_logic(d0, 1);
     assert d0 = "0100";
-    d0 := shift_rl(d0, 2);
+    d0 := shift_right_logic(d0, 2);
     assert d0 = "0001";
 
     u0 := "1000";
-    u0 := shift_rl(u0, 1);
+    u0 := shift_right_logic(u0, 1);
     assert u0 = "0100";
-    u0 := shift_rl(u0, 2);
+    u0 := shift_right_logic(u0, 2);
     assert u0 = "0001";
 
     d0 := "0001";
-    d0 := shift_ll(d0, 1);
+    d0 := shift_left_logic(d0, 1);
     assert d0 = "0010";
-    d0 := shift_ll(d0, 2);
+    d0 := shift_left_logic(d0, 2);
     assert d0 = "1000";
 
     u0 := "0001";
-    u0 := shift_ll(u0, 1);
+    u0 := shift_left_logic(u0, 1);
     assert u0 = "0010";
-    u0 := shift_ll(u0, 2);
+    u0 := shift_left_logic(u0, 2);
     assert u0 = "1000";
 
     report "Testing arithmetic shift operators...";
 
     d1 := "1";
-    d1 := shift_la(d1, 0);
+    d1 := shift_left_arith(d1, 0);
     assert d1 = "1";
 
     d1 := "1";
-    d1 := shift_la(d1, 1);
+    d1 := shift_left_arith(d1, 1);
     assert d1 = "0";
 
     u1 := "1";
-    u1 := shift_la(u1, 0);
+    u1 := shift_left_arith(u1, 0);
     assert u1 = "1";
 
     u1 := "1";
-    u1 := shift_la(u1, 1);
+    u1 := shift_left_arith(u1, 1);
     assert u1 = "1";
 
     d1 := "1";
-    d1 := shift_ra(d1, 0);
+    d1 := shift_right_arith(d1, 0);
     assert d1 = "1";
 
     d1 := "1";
-    d1 := shift_ra(d1, 1);
+    d1 := shift_right_arith(d1, 1);
     assert d1 = "1";
 
     u1 := "1";
-    u1 := shift_ra(u1, 0);
+    u1 := shift_right_arith(u1, 0);
     assert u1 = "1";
 
     u1 := "1";
-    u1 := shift_ra(u1, 1);
+    u1 := shift_right_arith(u1, 1);
     assert u1 = "0";
 
     d0 := "1010";
-    d0 := shift_ra(d0, 0);
+    d0 := shift_right_arith(d0, 0);
     assert d0 = "1010";
 
     u0 := "1010";
-    u0 := shift_ra(u0, 0);
+    u0 := shift_right_arith(u0, 0);
     assert u0 = "1010";
 
     d0 := "1010";
-    d0 := shift_la(d0, 0);
+    d0 := shift_left_arith(d0, 0);
     assert d0 = "1010";
 
     u0 := "1010";
-    u0 := shift_la(u0, 0);
+    u0 := shift_left_arith(u0, 0);
     assert u0 = "1010";
 
     d0 := "1000";
-    d0 := shift_ra(d0, 1);
+    d0 := shift_right_arith(d0, 1);
     assert d0 = "1100";
-    d0 := shift_ra(d0, 2);
+    d0 := shift_right_arith(d0, 2);
     assert d0 = "1111";
 
     u0 := "1000";
-    u0 := shift_ra(u0, 1);
+    u0 := shift_right_arith(u0, 1);
     assert u0 = "0100";
-    u0 := shift_ra(u0, 2);
+    u0 := shift_right_arith(u0, 2);
     assert u0 = "0001";
 
     d0 := "0001";
-    d0 := shift_la(d0, 1);
+    d0 := shift_left_arith(d0, 1);
     assert d0 = "0010";
-    d0 := shift_la(d0, 2);
+    d0 := shift_left_arith(d0, 2);
     assert d0 = "1000";
 
     u0 := "0001";
-    u0 := shift_la(u0, 1);
+    u0 := shift_left_arith(u0, 1);
     assert u0 = "0011";
-    u0 := shift_la(u0, 2);
+    u0 := shift_left_arith(u0, 2);
     assert u0 = "1111";
 
     report "Testing rotation operators...";
@@ -183,103 +183,103 @@ begin
     -- rotation right
 
     d0 := "1001";
-    d0 := rotate_r(d0, 1);
+    d0 := rotate_right(d0, 1);
     assert d0 = "1100";
 
     d0 := "1100";
-    d0 := rotate_r(d0, 2);
+    d0 := rotate_right(d0, 2);
     assert d0 = "0011";
 
     d0 := "1100";
-    d0 := rotate_r(d0, 4);
+    d0 := rotate_right(d0, 4);
     assert d0 = "1100";
 
     d0 := "1100";
-    d0 := rotate_r(d0, 5);
+    d0 := rotate_right(d0, 5);
     assert d0 = "0110";
 
     u0 := "1001";
-    u0 := rotate_r(u0, 1);
+    u0 := rotate_right(u0, 1);
     assert u0 = "1100";
 
     u0 := "1100";
-    u0 := rotate_r(u0, 2);
+    u0 := rotate_right(u0, 2);
     assert u0 = "0011";
 
     u0 := "1100";
-    u0 := rotate_r(u0, 4);
+    u0 := rotate_right(u0, 4);
     assert u0 = "1100";
 
     u0 := "1100";
-    u0 := rotate_r(u0, 5);
+    u0 := rotate_right(u0, 5);
     assert u0 = "0110";
 
     -- rotation left
 
     d0 := "1001";
-    d0 := rotate_l(d0, 1);
+    d0 := rotate_left(d0, 1);
     assert d0 = "0011";
 
     d0 := "1100";
-    d0 := rotate_l(d0, 2);
+    d0 := rotate_left(d0, 2);
     assert d0 = "0011";
 
     d0 := "1100";
-    d0 := rotate_l(d0, 4);
+    d0 := rotate_left(d0, 4);
     assert d0 = "1100";
 
     d0 := "1100";
-    d0 := rotate_l(d0, 5);
+    d0 := rotate_left(d0, 5);
     assert d0 = "1001";
 
     u0 := "1001";
-    u0 := rotate_l(u0, 1);
+    u0 := rotate_left(u0, 1);
     assert u0 = "0011";
 
     u0 := "1100";
-    u0 := rotate_l(u0, 2);
+    u0 := rotate_left(u0, 2);
     assert u0 = "0011";
 
     u0 := "1100";
-    u0 := rotate_l(u0, 4);
+    u0 := rotate_left(u0, 4);
     assert u0 = "1100";
 
     u0 := "1100";
-    u0 := rotate_l(u0, 5);
+    u0 := rotate_left(u0, 5);
     assert u0 = "1001";
 
     report "Testing extension functions (downto)...";
 
     d0 := "1100";
-    d0_trunc := extend_z(d0, d0_trunc'length);
+    d0_trunc := extend_zero(d0, d0_trunc'length);
     assert d0_trunc = "00" report to_str(d0_trunc) severity error;
 
-    d0_exten := extend_z(d0, d0_exten'length);
+    d0_exten := extend_zero(d0, d0_exten'length);
     assert d0_exten = "001100" report to_str(d0_exten) severity error;
 
-    d0_trunc := extend_s(d0, d0_trunc'length);
+    d0_trunc := extend_sign(d0, d0_trunc'length);
     assert d0_trunc = "10" report to_str(d0_trunc) severity error;
 
-    d0_exten := extend_s(d0, d0_exten'length);
+    d0_exten := extend_sign(d0, d0_exten'length);
     assert d0_exten  ="111100" report to_str(d0_exten) severity error;
 
     d0 := "1001";
-    d0_trunc := extend_s(d0, d0_trunc'length);
+    d0_trunc := extend_sign(d0, d0_trunc'length);
     assert d0_trunc = "11" report to_str(d0_trunc) severity error;
 
     report "Testing extension functions (to)...";
 
     u0 := "1001";
-    u0_trunc := extend_z(u0, u0_trunc'length);
+    u0_trunc := extend_zero(u0, u0_trunc'length);
     assert u0_trunc = "10" report to_str(u0_trunc) severity error;
 
-    u0_exten := extend_z(u0, u0_exten'length);
+    u0_exten := extend_zero(u0, u0_exten'length);
     assert u0_exten = "100100" report to_str(u0_exten) severity error;
 
-    u0_trunc := extend_s(u0, u0_trunc'length);
+    u0_trunc := extend_sign(u0, u0_trunc'length);
     assert u0_trunc = "11" report to_str(u0_trunc) severity error;
 
-    u0_exten := extend_s(u0, u0_exten'length);
+    u0_exten := extend_sign(u0, u0_exten'length);
     assert u0_exten = "100111" report to_str(u0_exten) severity error;
 
     wait;

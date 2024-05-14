@@ -153,14 +153,14 @@ package prelude is
 
   -- This function computes 2 raised to the `k` power.
   -- 
-  -- It effectively determines the maximum number of possible values of a
-  -- space represented in binary for a vector with `k` width.
+  -- It effectively determines the maximum number of values available for `k`
+  -- bits.
   function pow2(k: usize) return usize;
 
   -- This function computes 2 raised to the `k` minus 1 power.
   -- 
-  -- It effectively determines the maximum number represented in binary for a 
-  -- vector with `k` width.
+  -- It effectively determines the maximum unsigned number represented in binary 
+  -- for `k` bits.
   function pow2m1(k: usize) return usize;
 
   -- This function checks if `k` is a power of 2.
@@ -183,70 +183,49 @@ package prelude is
 
   -- This function shifts a logic vector logically to the left while inserting 
   -- zeros from the right. It is a zero-fill left-shift.
-  function shift_ll(x: logics; k: usize) return logics;
+  function shift_left_logic(x: logics; k: usize) return logics;
 
   -- This function shifts a logic vector logically to the right while inserting 
   -- zeros from the left. It is a zero-fill right-shift.
-  function shift_rl(x: logics; k: usize) return logics;
+  function shift_right_logic(x: logics; k: usize) return logics;
 
   -- This function shifts a logic vector to the left while inserting zeros from
   -- the right. It is a zero-fill left-shift.
   --
   -- When the logic vector's range is ascending, then this operation performs
   -- sticky right-shift with the MSB being inserted from the right.
-  function shift_la(x: logics; k: usize) return logics;
+  function shift_left_arith(x: logics; k: usize) return logics;
 
   -- This function shift a logic vector to the right while inserting the MSB
   -- from the left. It is a sticky right-shift.
   --
   -- When the logic vector's range is ascending, then this operation performs
   -- zero-fill right-shift with 0's being inserted into the LSB position.
-  function shift_ra(x: logics; k: usize) return logics;
+  function shift_right_arith(x: logics; k: usize) return logics;
 
   -- This function performs a circular rotation of a logic vector's elements.
   -- Elements are pushed off from the right side and are reinserted back to the 
   -- left side.
-  function rotate_r(x: logics; k: usize) return logics;
+  function rotate_right(x: logics; k: usize) return logics;
 
   -- This function performs a circular rotation of a logic vector's elements.
   -- Elements are pushed off from the left side and are reinserted back to the
   -- right side.
-  function rotate_l(x: logics; k: usize) return logics;
+  function rotate_left(x: logics; k: usize) return logics;
 
   -- This function performs a zero-extension to the logic vector by a specifying
   -- the total number of bits for the resulting vector.
   --
   -- Additional bits are filled with '0'. It is an error for the number of bits
   -- n < len(x).
-  function extend_z(x: logics; n: usize) return logics;
+  function extend_zero(x: logics; n: usize) return logics;
 
   -- This function performs a sign-extension to the logic vector by a specifying
   -- the total number of bits for the resulting vector. 
   --
   -- Additional bits are filled with the MSB. It is an error for the amount of
   -- bits n < len(x).
-  function extend_s(x: logics; n: usize) return logics;
-
-  -- Returns a subspace of len(`v_slice`) at index `i` of the entire space `v_array`.
-  -- 
-  -- This function can be interpreted as returning the (n-1)-dimensional slice from a 
-  -- n-dimensional array.
-  function get_slice(v_array: logics; v_slice: logics; i: usize; offset: usize := 0) return logics;
-
-  -- Returns the entire space `v_array` after storing the subspace `v_slice` at
-  -- index `i` of the entire space `v_array`.
-  --
-  -- This function can be interpreted as returning the n-dimensional array after
-  -- modifying the (n-1)-dimensional slice at index `i` with the value of `v_slice`.
-  function set_slice(v_array: logics; v_slice: logics; i: usize; offset: usize := 0) return logics;
-
-  -- Returns the index to a point in the multi-dimensional space defined by lengths defined
-  -- in `axes` and by positions defined in `indices`.
-  --
-  -- Each element in the corresponding lists should be ordered from highest
-  -- dimensions to lowest dimension. For example, for a 3-dimensional space
-  -- defined by X, Y, and Z, the order is (Z, Y, X).
-  function index_space(axes: psizes; indices: usizes) return usize;
+  function extend_sign(x: logics; n: usize) return logics;
 
 end package;
 
@@ -456,7 +435,7 @@ package body prelude is
   end function;
 
 
-  function shift_ll(x: logics; k: usize) return logics is
+  function shift_left_logic(x: logics; k: usize) return logics is
     variable result: logics(x'range);
   begin
     if x'length = 1 and k > 0 then
@@ -479,7 +458,7 @@ package body prelude is
   end function;
 
 
-  function shift_rl(x: logics; k: usize) return logics is
+  function shift_right_logic(x: logics; k: usize) return logics is
     variable result: logics(x'range);
   begin
     if x'length = 1 and k > 0 then
@@ -502,7 +481,7 @@ package body prelude is
   end function;
 
 
-  function shift_la(x: logics; k: usize) return logics is
+  function shift_left_arith(x: logics; k: usize) return logics is
     variable result: logics(x'range);
   begin
     if x'length = 1 and k > 0 then
@@ -530,7 +509,7 @@ package body prelude is
   end function;
 
 
-  function shift_ra(x: logics; k: usize) return logics is
+  function shift_right_arith(x: logics; k: usize) return logics is
     variable result: logics(x'range);
   begin
     if x'length = 1 and k > 0 then
@@ -558,7 +537,7 @@ package body prelude is
   end function;
 
 
-  function rotate_r(x: logics; k: usize) return logics is
+  function rotate_right(x: logics; k: usize) return logics is
     variable result: logics(x'range);
   begin
     result := x;
@@ -575,7 +554,7 @@ package body prelude is
   end function;
 
 
-  function rotate_l(x: logics; k: usize) return logics is
+  function rotate_left(x: logics; k: usize) return logics is
     variable result: logics(x'range);
   begin
     result := x;
@@ -592,11 +571,11 @@ package body prelude is
   end function;
 
 
-  function extend_z(x: logics; n: usize) return logics is
+  function extend_zero(x: logics; n: usize) return logics is
     variable tmp: logics(0 downto 0);
   begin
     if n < x'length then
-      assert false report "MANIP.EXTEND_Z: vector truncated" severity warning;
+      assert false report "MANIP.EXTEND_ZERO: vector truncated" severity warning;
     end if;
     if x'ascending = false then
       return logics(resize(usign(x), n));
@@ -611,11 +590,11 @@ package body prelude is
   end function;
 
 
-  function extend_s(x: logics; n: usize) return logics is
+  function extend_sign(x: logics; n: usize) return logics is
     variable tmp: logics(0 downto 0);
   begin
     if n < x'length then
-      assert false report "MANIP.EXTEND_S: vector truncated" severity warning;
+      assert false report "MANIP.EXTEND_SIGN: vector truncated" severity warning;
     end if;
     if x'ascending = false then
       return logics(resize(isign(x), n));
@@ -629,58 +608,6 @@ package body prelude is
         return x & logics(resize(isign(tmp), n - x'length));
       end if;
     end if;
-  end function;
-
-
-  function get_slice(v_array: logics; v_slice: logics; i: usize; offset: usize := 0) return logics is
-    variable shift: usize := offset + v_array'low;
-    variable len_slice: usize := v_slice'length;
-  begin
-    if v_array'ascending = true then
-      return v_array((i*len_slice)+shift to ((i+1)*len_slice)-1+shift);
-    else
-      return v_array(((i+1)*len_slice)-1+shift downto (i*len_slice)+shift);
-    end if;
-  end function;
-
-
-  function set_slice(v_array: logics; v_slice: logics; i: usize; offset: usize := 0) return logics is
-    variable shift: usize := offset + v_array'low;
-    variable len_slice: usize := v_slice'length;
-    variable inner_v_array: logics(v_array'range) := v_array;
-  begin
-    if inner_v_array'ascending = true then
-      inner_v_array((i*len_slice)+shift to ((i+1)*len_slice)-1+shift) := v_slice;
-    else 
-      inner_v_array(((i+1)*len_slice)-1+shift downto (i*len_slice)+shift) := v_slice;
-    end if;
-    return inner_v_array;
-  end function;
-
-
-  function index_space(axes: psizes; indices: usizes) return usize is 
-    variable result: usize := 0;
-    variable jump: usize := 1;
-    variable len: usize := axes'length;
-  begin
-    if axes'length /= indices'length then
-      report "DIM.INDEX_SPACE: vectors for slice lengths and indices do not match" severity warning;
-    end if;
-    result := jump * indices(len-1);
-    if indices(len-1) >= axes(len-1) then
-      report "DIM.INDEX_SPACE: index at dimension " & int'image(len) & " is out of bounds" severity warning;
-    end if;
-    for k in len-2 downto 0 loop
-      jump := jump * axes(k+1);
-      result := result + (jump * indices(k));
-      if indices(k) >= axes(k) then
-        report "DIM.INDEX_SPACE: index at dimension " & int'image(k+1) & " is out of bounds" severity warning;
-      end if;
-    end loop;
-    if result > jump * axes(0) then
-      report "DIM.INDEX_SPACE: index out of bounds" severity warning;
-    end if;
-    return result;
   end function;
 
 

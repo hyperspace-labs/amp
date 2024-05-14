@@ -9,18 +9,23 @@ import os
 SRC_DIR = './src'
 
 FILE_ORDER = [
-    'types.vhd',
-    'cast.vhd',
-    'math.vhd',
-    'manip.vhd',
-    'dim.vhd'
+    ('types.vhd', True),
+    ('cast.vhd', True),
+    ('math.vhd', True),
+    ('manip.vhd', True),
+    ('dim.vhd', False),
 ]
 
 pkg_headers = []
 pkg_bodies = []
  
-for path in FILE_ORDER:
+for (path, should_inc) in FILE_ORDER:
     pkg_filepath = SRC_DIR + '/' + path
+    
+    if should_inc == False:
+        print('info: Excluding package ' + pkg_filepath + '...')
+        continue
+    
     print('info: Copying package ' + pkg_filepath + '...')
     # read each file and locate its package header and body (if exists)
     with open(pkg_filepath, 'r') as fd:
