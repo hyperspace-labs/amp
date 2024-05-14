@@ -5,4 +5,5 @@ version = 1
 name = "amp"
 version = "0.1.0"
 uuid = "95a1edfe-a4a7-4dc0-a897-d60257d78e46"
+url = "https://github.com/hyperspace-labs/amp/archive/refs/tags/{{ orbit.ip.version }}.zip"
 dependencies = []
