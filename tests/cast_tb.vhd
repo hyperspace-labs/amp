@@ -32,16 +32,21 @@ begin
     assert to_str(c_u) = "0" severity error;
     assert to_str(c_i) = "-14" severity error;
     
-    report to_str(v0);
-    report to_str(b0);
-    report int'image(to_int(isign(v0)));
-    report int'image(to_int(usign(v0)));
+    assert to_str(v0) = "1010" severity error;
+    assert to_str(b0) = "1" severity error;
 
-    report logic'image(to_logic('a'));
+    assert to_str(to_int(isign(v0))) = "-6" severity error;
+    assert to_str(to_int(usign(v0))) = "10" severity error;
 
-    report "vv0 = " & to_str(vv0);
+    assert to_str(to_logic('a')) = "0" severity error;
+
+    assert to_str(vv0) = "0W-0" report "vv0 = " & to_str(vv0) severity error;
+
     vv0 := logics(to_usign(16, vv0'length));
-    report "vv0 = " & to_str(vv0);
+    assert to_str(vv0) = "0000" report "vv0 = " & to_str(vv0) severity error;
+    
+    assert to_str(now) = "0 fs" severity error;
+    
     wait;
   end process;
 

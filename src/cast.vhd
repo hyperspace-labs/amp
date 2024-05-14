@@ -22,6 +22,12 @@ package cast is
   -- Casts an integer to a string.
   function to_str(k: int) return str;
 
+  -- Casts a boolean to a string.
+  function to_str(b: bool) return str;
+
+  -- Casts a time to a string.
+  function to_str(t: time) return str;
+
   -- Casts a character to a logic bit.
   function to_logic(c: char) return logic;
 
@@ -109,6 +115,18 @@ package body cast is
   function to_str(k: int) return str is
   begin
     return int'image(k);
+  end function;
+
+
+  function to_str(b: bool) return str is
+  begin
+    return bool'image(b);
+  end function;
+
+
+  function to_str(t: time) return str is
+  begin
+    return time'image(t);
   end function;
 
 

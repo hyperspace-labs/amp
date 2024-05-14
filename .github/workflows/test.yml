@@ -61,3 +61,10 @@ jobs:
           orbit b -- --std=93
           orbit b -- --std=02
           orbit b -- --std=08
+
+      - name: Test cast package
+        run: |
+          orbit plan --clean --plugin gsim --bench cast_tb
+          orbit b -- --std=93
+          orbit b -- --std=02
+          orbit b -- --std=08
