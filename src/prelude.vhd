@@ -463,48 +463,14 @@ package body prelude is
 
 
   function shift_left_logic(x: logics; k: usize) return logics is
-    variable result: logics(x'range);
   begin
-    if x'length = 1 and k > 0 then
-      return "0";
-    end if;
-
-    result := x;
-    -- shift left logical 'k' times
-    for i in 1 to k loop
-      -- provided with 'to'
-      if x'ascending = true then
-        result := result(x'left+1 to x'right) & "0";
-      -- provided with 'downto'
-      else 
-        result := result(x'left-1 downto x'right) & "0";
-      end if;
-    end loop;
-
-    return result;
+    return logics(usign(x) sll k);
   end function;
 
 
   function shift_right_logic(x: logics; k: usize) return logics is
-    variable result: logics(x'range);
   begin
-    if x'length = 1 and k > 0 then
-      return "0";
-    end if;
-
-    result := x;
-    -- shift right logical 'k' times
-    for i in 1 to k loop
-      -- provided with 'to'
-      if x'ascending = true then
-        result := "0" & result(x'left to x'right-1);
-      -- provided with 'downto'
-      else 
-        result := "0" & result(x'left downto x'right+1);
-      end if;
-    end loop;
-
-    return result;
+    return logics(usign(x) srl k);
   end function;
 
 
