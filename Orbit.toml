@@ -1,9 +1,9 @@
 [ip]
 name = "amp"
 summary = "an amplified standard library"
-version = "1.0.0"
-source = "https://github.com/hyperspace-labs/amp/archive/refs/tags/1.0.0.zip"
+version = "1.1.0"
+source = "https://github.com/hyperspace-labs/amp/archive/refs/tags/1.1.0.zip"
 
-# See more keys and their definitions at https://c-rus.github.io/orbit/reference/manifest.html
+# See more keys and their definitions at https://cdotrus.github.io/orbit/reference/manifest.html
 
 [dependencies]

@@ -96,17 +96,12 @@ package prelude is
   -- A fixed-size array of `psize` element types.
   type psizes is array(natural range<>) of psize;
 
-  -- An unresolved fixed logic vector of length 8.
-  subtype byte is logics(7 downto 0);
-
-  -- A resolved fixed logic vector of length 8.
-  subtype rbyte is rlogics(7 downto 0);
-
-  -- A fixed-size array of `byte` element types.
-  type bytes is array(natural range<>) of byte;
-
-  -- A fixed-size array of `rbyte` element types.
-  type rbytes is array(natural range<>) of rbyte;
+  -- A fixed-size array of `int` element types.
+  type ints is array(natural range<>) of int;
+  -- A fixed-size array of `nal` element types.
+  type nals is array(natural range<>) of nal;
+  -- A fixed-size array of `pve` element types.
+  type pves is array(natural range<>) of pve;
 
   -- A severity level type.
   subtype sevel is severity_level;
@@ -134,6 +129,9 @@ package prelude is
 
   -- Casts a character to a logic bit.
   function to_logic(c: char) return logic;
+
+  -- Casts a logic bit to a logic vector.
+  function to_logics(b: logic) return logics;
 
   -- Casts an unsigned vector to an integer.
   function to_int(v: usign) return int;
@@ -346,6 +344,14 @@ package body prelude is
       assert false report "CAST.TO_LOGIC: unsupported character" severity warning;
       return '0';
     end if;
+  end function;
+
+  
+  function to_logics(b: logic) return logics is
+    variable v: logics(0 downto 0);
+  begin
+    v(0) := b;
+    return v;
   end function;
 
 

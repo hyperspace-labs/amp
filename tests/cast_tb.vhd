@@ -12,13 +12,18 @@ architecture sim of cast_tb is
 
   signal b0: logic := '1';
   signal v0: logics(3 downto 0) := "1010";
-  
+  signal v1: logics(5 downto 0) := (others => '0');
+
+  signal op: logics(1 downto 0) := "00";
+
 begin
 
   uut: entity work.pseudo
     port map(
       active => open
     );
+
+  v1 <= logics(usign(logics(op & v0)));
 
   check: process
     variable vv0: logics(3 downto 0) := "0W-0";
@@ -46,6 +51,8 @@ begin
     assert to_str(vv0) = "0000" report "vv0 = " & to_str(vv0) severity error;
     
     assert to_str(now) = "0 fs" severity error;
+
+    assert to_logics(b0) = "1" severity error;
     
     wait;
   end process;

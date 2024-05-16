@@ -31,6 +31,9 @@ package cast is
   -- Casts a character to a logic bit.
   function to_logic(c: char) return logic;
 
+  -- Casts a logic bit to a logic vector.
+  function to_logics(b: logic) return logics;
+
   -- Casts an unsigned vector to an integer.
   function to_int(v: usign) return int;
 
@@ -154,6 +157,14 @@ package body cast is
       assert false report "CAST.TO_LOGIC: unsupported character" severity warning;
       return '0';
     end if;
+  end function;
+
+  
+  function to_logics(b: logic) return logics is
+    variable v: logics(0 downto 0);
+  begin
+    v(0) := b;
+    return v;
   end function;
 
 
