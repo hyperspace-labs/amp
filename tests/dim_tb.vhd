@@ -56,8 +56,6 @@ begin
     constant X_LEN: usize := 1;
     constant Y_LEN: usize := 4;
 
-    constant code: bytes(2 downto 0) := (x"FF", x"BB", x"55");
-
     variable grid: logics(X_LEN*Y_LEN-1 downto 0) := ('0', '0', '1', '1');
     
     variable row: logics(X_LEN-1 downto 0);
