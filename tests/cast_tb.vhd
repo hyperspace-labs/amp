@@ -53,7 +53,13 @@ begin
     assert to_str(now) = "0 fs" severity error;
 
     assert to_logics(b0) = "1" severity error;
-    
+
+    assert to_int(str'("102")) = 102 severity error;
+
+    assert to_int(str'("-257")) = -257 severity error;
+
+    assert to_int(str'("72")) = 72 severity error;
+
     wait;
   end process;
 

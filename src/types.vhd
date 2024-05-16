@@ -10,6 +10,16 @@ use ieee.numeric_std.all;
 
 package types is
 
+  -- An unresolved logic type.
+  subtype logic is std_ulogic;
+  -- A fixed-size array of `logic` element types.
+  subtype logics is std_ulogic_vector;
+
+  -- A resolved logic type.
+  subtype rlogic is std_logic;
+  -- A fixed-size array of `rlogic` element types.
+  subtype rlogics is std_logic_vector;
+
   -- The 8-bit signed integer type.
   subtype i8 is integer range -128 to 127;
   -- The 16-bit signed integer type.
@@ -38,42 +48,12 @@ package types is
   -- The compiler-sized positive integer type.
   subtype psize is positive;
 
-  -- The boolean type.
-  subtype bool is boolean;
-
-  -- A character type.
-  subtype char is character;
-
   -- Another naming notation for compiler-sized signed integer type.
   subtype int is integer;
   -- Another naming notation for compiler-sized unsigned integer type.
-  subtype nal is natural;
+  subtype uint is natural;
   -- Another naming notation for compiler-sized positive integer type.
-  subtype pve is positive;
-
-  -- A fixed-size array of `char` element types.
-  subtype str is string;
-
-  -- A fixed-size array of `bit` element types.
-  subtype bits is bit_vector;
-
-  -- An unresolved logic type.
-  subtype logic is std_ulogic;
-  -- A fixed-size array of `logic` element types.
-  subtype logics is std_ulogic_vector;
-
-  -- A resolved logic type.
-  subtype rlogic is std_logic;
-  -- A fixed-size array of `rlogic` element types.
-  subtype rlogics is std_logic_vector;
-
-  -- The unsigned logic type.
-  subtype usign is unsigned;
-  -- The signed logic type.
-  subtype isign is signed;
-
-  -- A fixed-size array of `bool` element types.
-  type bools is array(natural range<>) of bool;
+  subtype pint is positive;
 
   -- A fixed-size array of `i8` element types.
   type i8s is array(natural range<>) of i8;
@@ -89,6 +69,13 @@ package types is
   -- A fixed-size array of `u32` element types.
   type u32s is array(natural range<>) of u32;
 
+  -- A fixed-size array of `p8` element types.
+  type p8s is array(natural range<>) of p8;
+  -- A fixed-size array of `p16` element types.
+  type p16s is array(natural range<>) of p16;
+  -- A fixed-size array of `p32` element types.
+  type p32s is array(natural range<>) of p32;
+
   -- A fixed-size array of `isize` element types.
   type isizes is array(natural range<>) of isize;
   -- A fixed-size array of `usize` element types.
@@ -98,10 +85,31 @@ package types is
 
   -- A fixed-size array of `int` element types.
   type ints is array(natural range<>) of int;
-  -- A fixed-size array of `nal` element types.
-  type nals is array(natural range<>) of nal;
-  -- A fixed-size array of `pve` element types.
-  type pves is array(natural range<>) of pve;
+  -- A fixed-size array of `uint` element types.
+  type uints is array(natural range<>) of uint;
+  -- A fixed-size array of `pint` element types.
+  type pints is array(natural range<>) of pint;
+
+  -- The unsigned logic type.
+  subtype usign is unsigned;
+
+  -- The signed logic type.
+  subtype isign is signed;
+
+  -- The boolean type.
+  subtype bool is boolean;  
+  
+  -- A fixed-size array of `bool` element types.
+  type bools is array(natural range<>) of bool;
+  
+  -- A character type.
+  subtype char is character;
+
+  -- A fixed-size array of `char` element types.
+  subtype str is string;
+
+  -- A fixed-size array of `bit` element types.
+  subtype bits is bit_vector;
 
   -- A severity level type.
   subtype sevel is severity_level;

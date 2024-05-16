@@ -28,6 +28,9 @@ package cast is
   -- Casts a time to a string.
   function to_str(t: time) return str;
 
+  -- Casts a real to a string.
+  function to_str(r: real) return str;
+
   -- Casts a character to a logic bit.
   function to_logic(c: char) return logic;
 
@@ -39,6 +42,9 @@ package cast is
 
   -- Casts a signed vector to an integer.
   function to_int(v: isign) return int;
+
+  -- Casts a string to an integer.
+  function to_int(s: str) return int;
 
   -- Casts an integer `k` to a signed vector of `n` bits.
   function to_isign(k: int; n: usize) return isign;
@@ -133,6 +139,12 @@ package body cast is
   end function;
 
 
+  function to_str(r: real) return str is
+  begin
+    return real'image(r);
+  end function;
+
+
   function to_logic(c: char) return logic is
   begin
     if c = '1' then
@@ -177,6 +189,12 @@ package body cast is
   function to_int(v: isign) return int is
   begin
     return to_integer(v);
+  end function;
+
+
+  function to_int(s: str) return int is
+  begin
+    return integer'value(s);
   end function;
 
 
