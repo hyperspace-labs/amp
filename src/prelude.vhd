@@ -12,81 +12,103 @@ package prelude is
 
   -- An unresolved logic type.
   subtype logic is std_ulogic;
+
   -- A fixed-size array of `logic` element types.
   subtype logics is std_ulogic_vector;
 
   -- A resolved logic type.
   subtype rlogic is std_logic;
+
   -- A fixed-size array of `rlogic` element types.
   subtype rlogics is std_logic_vector;
 
   -- The 8-bit signed integer type.
   subtype i8 is integer range -128 to 127;
+
   -- The 16-bit signed integer type.
   subtype i16 is integer range -32768 to 32767;
+
   -- The 32-bit signed integer type.
   subtype i32 is integer range -2147483648 to 2147483647;
 
   -- The 8-bit unsigned integer type.
   subtype u8 is natural range 0 to 255;
+
   -- The 16-bit unsigned integer type.
   subtype u16 is natural range 0 to 65535;
+
   -- The 32-bit unsigned integer type.
   subtype u32 is natural range 0 to 2147483647;
 
   -- The 8-bit positive integer type.
   subtype p8 is positive range 1 to 256;
+
   -- The 16-bit positive integer type.
   subtype p16 is positive range 1 to 65536;
+
   -- The 32-bit positive integer type.
   subtype p32 is positive range 1 to 2147483647;
 
   -- The compiler-sized signed integer type.
   subtype isize is integer;
+
   -- The compiler-sized unsigned integer type.
   subtype usize is natural;
+
   -- The compiler-sized positive integer type.
   subtype psize is positive;
 
-  -- Another naming notation for compiler-sized signed integer type.
+  -- The compiler-sized signed integer type.
   subtype int is integer;
-  -- Another naming notation for compiler-sized unsigned integer type.
+
+  -- The compiler-sized unsigned integer type.
   subtype uint is natural;
-  -- Another naming notation for compiler-sized positive integer type.
+
+  -- The compiler-sized positive integer type.
   subtype pint is positive;
 
   -- A fixed-size array of `i8` element types.
   type i8s is array(natural range<>) of i8;
+
   -- A fixed-size array of `i16` element types.
   type i16s is array(natural range<>) of i16;
+
   -- A fixed-size array of `i32` element types.
   type i32s is array(natural range<>) of i32;
 
   -- A fixed-size array of `u8` element types.
   type u8s is array(natural range<>) of u8;
+
   -- A fixed-size array of `u16` element types.
   type u16s is array(natural range<>) of u16;
+
   -- A fixed-size array of `u32` element types.
   type u32s is array(natural range<>) of u32;
 
   -- A fixed-size array of `p8` element types.
   type p8s is array(natural range<>) of p8;
+
   -- A fixed-size array of `p16` element types.
   type p16s is array(natural range<>) of p16;
+
   -- A fixed-size array of `p32` element types.
   type p32s is array(natural range<>) of p32;
 
   -- A fixed-size array of `isize` element types.
   type isizes is array(natural range<>) of isize;
+
   -- A fixed-size array of `usize` element types.
   type usizes is array(natural range<>) of usize;
+
   -- A fixed-size array of `psize` element types.
   type psizes is array(natural range<>) of psize;
 
   -- A fixed-size array of `int` element types.
   type ints is array(natural range<>) of int;
+
   -- A fixed-size array of `uint` element types.
   type uints is array(natural range<>) of uint;
+  
   -- A fixed-size array of `pint` element types.
   type pints is array(natural range<>) of pint;
 
@@ -196,14 +218,14 @@ package prelude is
   --
   -- Additional bits are filled with '0'. It is an error for the number of bits
   -- n < len(x).
-  function extend_zero(x: logics; n: usize) return logics;
+  function zero_extend(x: logics; n: usize) return logics;
 
   -- This function performs a sign-extension to the logic vector by a specifying
   -- the total number of bits for the resulting vector. 
   --
   -- Additional bits are filled with the MSB. It is an error for the amount of
   -- bits n < len(x).
-  function extend_sign(x: logics; n: usize) return logics;
+  function sign_extend(x: logics; n: usize) return logics;
 
 end package;
 
@@ -464,11 +486,11 @@ package body prelude is
   end function;
 
 
-  function extend_zero(x: logics; n: usize) return logics is
+  function zero_extend(x: logics; n: usize) return logics is
     variable tmp: logics(0 downto 0);
   begin
     if n < x'length then
-      assert false report "MANIP.EXTEND_ZERO: vector truncated" severity warning;
+      assert false report "MANIP.zero_extend: vector truncated" severity warning;
     end if;
     if x'ascending = false then
       return logics(resize(usign(x), n));
@@ -483,11 +505,11 @@ package body prelude is
   end function;
 
 
-  function extend_sign(x: logics; n: usize) return logics is
+  function sign_extend(x: logics; n: usize) return logics is
     variable tmp: logics(0 downto 0);
   begin
     if n < x'length then
-      assert false report "MANIP.EXTEND_SIGN: vector truncated" severity warning;
+      assert false report "MANIP.sign_extend: vector truncated" severity warning;
     end if;
     if x'ascending = false then
       return logics(resize(isign(x), n));

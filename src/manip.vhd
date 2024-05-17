@@ -50,14 +50,14 @@ package manip is
   --
   -- Additional bits are filled with '0'. It is an error for the number of bits
   -- n < len(x).
-  function extend_zero(x: logics; n: usize) return logics;
+  function zero_extend(x: logics; n: usize) return logics;
 
   -- This function performs a sign-extension to the logic vector by a specifying
   -- the total number of bits for the resulting vector. 
   --
   -- Additional bits are filled with the MSB. It is an error for the amount of
   -- bits n < len(x).
-  function extend_sign(x: logics; n: usize) return logics;
+  function sign_extend(x: logics; n: usize) return logics;
 
 end package;
 
@@ -166,11 +166,11 @@ package body manip is
   end function;
 
 
-  function extend_zero(x: logics; n: usize) return logics is
+  function zero_extend(x: logics; n: usize) return logics is
     variable tmp: logics(0 downto 0);
   begin
     if n < x'length then
-      assert false report "MANIP.EXTEND_ZERO: vector truncated" severity warning;
+      assert false report "MANIP.zero_extend: vector truncated" severity warning;
     end if;
     if x'ascending = false then
       return logics(resize(usign(x), n));
@@ -185,11 +185,11 @@ package body manip is
   end function;
 
 
-  function extend_sign(x: logics; n: usize) return logics is
+  function sign_extend(x: logics; n: usize) return logics is
     variable tmp: logics(0 downto 0);
   begin
     if n < x'length then
-      assert false report "MANIP.EXTEND_SIGN: vector truncated" severity warning;
+      assert false report "MANIP.sign_extend: vector truncated" severity warning;
     end if;
     if x'ascending = false then
       return logics(resize(isign(x), n));

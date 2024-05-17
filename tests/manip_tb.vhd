@@ -251,35 +251,35 @@ begin
     report "Testing extension functions (downto)...";
 
     d0 := "1100";
-    d0_trunc := extend_zero(d0, d0_trunc'length);
+    d0_trunc := zero_extend(d0, d0_trunc'length);
     assert d0_trunc = "00" report to_str(d0_trunc) severity error;
 
-    d0_exten := extend_zero(d0, d0_exten'length);
+    d0_exten := zero_extend(d0, d0_exten'length);
     assert d0_exten = "001100" report to_str(d0_exten) severity error;
 
-    d0_trunc := extend_sign(d0, d0_trunc'length);
+    d0_trunc := sign_extend(d0, d0_trunc'length);
     assert d0_trunc = "10" report to_str(d0_trunc) severity error;
 
-    d0_exten := extend_sign(d0, d0_exten'length);
+    d0_exten := sign_extend(d0, d0_exten'length);
     assert d0_exten  ="111100" report to_str(d0_exten) severity error;
 
     d0 := "1001";
-    d0_trunc := extend_sign(d0, d0_trunc'length);
+    d0_trunc := sign_extend(d0, d0_trunc'length);
     assert d0_trunc = "11" report to_str(d0_trunc) severity error;
 
     report "Testing extension functions (to)...";
 
     u0 := "1001";
-    u0_trunc := extend_zero(u0, u0_trunc'length);
+    u0_trunc := zero_extend(u0, u0_trunc'length);
     assert u0_trunc = "10" report to_str(u0_trunc) severity error;
 
-    u0_exten := extend_zero(u0, u0_exten'length);
+    u0_exten := zero_extend(u0, u0_exten'length);
     assert u0_exten = "100100" report to_str(u0_exten) severity error;
 
-    u0_trunc := extend_sign(u0, u0_trunc'length);
+    u0_trunc := sign_extend(u0, u0_trunc'length);
     assert u0_trunc = "11" report to_str(u0_trunc) severity error;
 
-    u0_exten := extend_sign(u0, u0_exten'length);
+    u0_exten := sign_extend(u0, u0_exten'length);
     assert u0_exten = "100111" report to_str(u0_exten) severity error;
 
     wait;

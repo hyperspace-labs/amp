@@ -10,12 +10,12 @@ This project is tested using the IEEE standard for VHDL 93, 02, and 08.
 
 Run the following Orbit command:
 ```
-orbit install amp:2.0.0 --url "https://github.com/hyperspace-labs/amp/archive/refs/tags/2.0.0.zip"
+orbit install amp:1.0.0 --url "https://github.com/hyperspace-labs/amp/archive/refs/tags/1.0.0.zip"
 ```
 
 Add the following line to your Orbit.toml:
 ```
-amp = "2.0.0"
+amp = "1.0.0"
 ```
 
 ## Packages
@@ -43,7 +43,7 @@ This package strives to meet the following objectives:
 1. Install the latest version of `amp` using Orbit:
 
 ```
-orbit install amp:2.0.0 --url "https://github.com/hyperspace-labs/amp/archive/refs/tags/2.0.0.zip"
+orbit install amp:1.0.0 --url "https://github.com/hyperspace-labs/amp/archive/refs/tags/1.0.0.zip"
 ```
 
 2. Update your current project's manifest file by adding `amp` as a dependency:
@@ -52,7 +52,7 @@ Filename: Orbit.toml
 ``` toml
 # ...
 [dependencies]
-amp = "2.0.0"
+amp = "1.0.0"
 ```
 
 3. Include the packages as normal in your current project's VHDL files wherever necessary:

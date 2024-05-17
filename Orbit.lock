@@ -3,7 +3,7 @@ version = 1
 
 [[ip]]
 name = "amp"
-version = "2.0.0"
+version = "1.0.0"
 uuid = "33bba0d9-1e0e-4b82-aa90-711d8e4baef7"
-url = "https://github.com/hyperspace-labs/amp/archive/refs/tags/2.0.0.zip"
+url = "https://github.com/hyperspace-labs/amp/archive/refs/tags/1.0.0.zip"
 dependencies = []
