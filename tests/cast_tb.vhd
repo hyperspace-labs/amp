@@ -32,7 +32,13 @@ begin
     constant c_u: usize := 0;
     constant c_i: isize := -14;
 
+    variable rr0: std_logic_vector(1 downto 0) := "10";
+    variable rr1: std_logic := '1';
   begin
+    -- passing a rlogics type into a logics parameter
+    assert to_str(logics(rr0)) = "10" severity error;
+    assert to_str(rr1) = "1" severity error;
+
     assert to_str(c_p) = "10" severity error;
     assert to_str(c_u) = "0" severity error;
     assert to_str(c_i) = "-14" severity error;
