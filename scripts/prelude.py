@@ -11,8 +11,8 @@ SRC_DIR = './src'
 FILE_ORDER = [
     ('types.vhd', True),
     ('cast.vhd', True),
-    ('math.vhd', True),
     ('manip.vhd', True),
+    ('math.vhd', False),
     ('dim.vhd', False),
 ]
 

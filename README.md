@@ -15,7 +15,7 @@ Name | Description | Included in `prelude`?
 `types` | Improved type names and additional types | ✔ 
 `cast` | Convenient conversions between types | ✔ 
 `manip` | Bit manipulation operations | ✔ 
-`math` | Compile-time arithmetic functions | ✔ 
+`math` | Compile-time arithmetic functions |
 `dim` | Functions for interpreting linear vectors in multi-dimensional space | 
 
 ## Project Goals
@@ -31,7 +31,7 @@ This package strives to meet the following objectives:
 1. Install the latest version of `amp` using `orbit`:
 
 ```
-orbit install amp:1.0.0 --url "https://github.com/hyperspace-labs/amp/archive/refs/tags/1.0.0.zip"
+orbit install amp:2.0.0 --url "https://github.com/hyperspace-labs/amp/archive/refs/tags/2.0.0.zip"
 ```
 
 2. Update your current project's `orbit` manifest file with `amp` as a dependency:
@@ -40,7 +40,7 @@ Filename: Orbit.toml
 ``` toml
 # ...
 [dependencies]
-amp = "1.0.0"
+amp = "2.0.0"
 ```
 
 3. Include the packages as normal in your current project's VHDL files wherever necessary:

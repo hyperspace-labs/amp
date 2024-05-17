@@ -14,7 +14,7 @@ package math is
 
   -- This function computes the logarithmic (base 2) for `k` and takes the 
   -- ceiling of the result. It effectively determines the minimum number of 
-  -- bits required to represent `k` possible values of a space.
+  -- bits required to enumerate `k` possible values of a space.
   --
   -- Equation: ceil(log2(k))
   function clog2(k: usize) return usize;
@@ -25,16 +25,16 @@ package math is
   -- Equation: floor(log2(k) + 1)
   function flog2p1(k: usize) return usize;
 
-  -- This function computes 2 raised to the `k` power.
-  -- 
-  -- It effectively determines the maximum number of values available for `k`
-  -- bits.
+  -- This function computes 2 raised to the `k` power. It effectively 
+  -- determines the maximum number of values available for `k` bits.
+  --
+  -- Equation: 2**k
   function pow2(k: usize) return usize;
 
-  -- This function computes 2 raised to the `k` minus 1 power.
-  -- 
-  -- It effectively determines the maximum unsigned number represented in binary 
-  -- for `k` bits.
+  -- This function computes 2 raised to the `k` minus 1 power. It effectively 
+  -- determines the maximum unsigned number represented in base 2 for `k` bits.
+  --
+  -- Equation: (2**k)-1
   function pow2m1(k: usize) return usize;
 
   -- This function checks if `k` is a power of 2.
@@ -43,17 +43,23 @@ package math is
   -- set to 1.
   function is_pow2(k: usize) return bool;
 
-  -- Computes the minimum number of bits required to represent `k` possible
+  -- Computes the minimum number of bits required to enumerate `k` possible
   -- values in a set.
   --
   -- Internally, this function uses `clog2(...)`.
-  function len_bits_enum(k: usize) return usize;
+  function length_bits_enum(k: usize) return usize;
 
   -- Computes the minimum number of bits required to represent the decimal
-  -- number `k` in standard binary notation.
+  -- number `k` in a base 2 numbering system.
   --
   -- Internally, this function uses `flog2p1(...)`.
-  function len_bits_repr(k: usize) return usize;
+  function length_bits_repr(k: usize) return usize;
+
+  -- Computes the index of the highest bit position that is set for the given
+  -- integer represented in base 2. This function assumes zero-based indices.
+  --
+  -- Internally, this function uses `flog2p1(...)` and then subtracts 1.
+  function highest_bit_set(k: usize) return usize;
 
 end package;
 
@@ -137,15 +143,21 @@ package body math is
   end function;
 
 
-  function len_bits_enum(k: usize) return usize is
+  function length_bits_enum(k: usize) return usize is
   begin
     return clog2(k);
   end function;
 
 
-  function len_bits_repr(k: usize) return usize is
+  function length_bits_repr(k: usize) return usize is
   begin
     return flog2p1(k);
+  end function;
+
+
+  function highest_bit_set(k: usize) return usize is
+  begin
+    return flog2p1(k)-1;
   end function;
 
 end package body;
