@@ -40,22 +40,7 @@ This package strives to meet the following objectives:
 
 ## How to Use
 
-1. Install the latest version of `amp` using Orbit:
-
-```
-orbit install amp:1.0.0 --url "https://github.com/hyperspace-labs/amp/archive/refs/tags/1.0.0.zip"
-```
-
-2. Update your current project's manifest file by adding `amp` as a dependency:
-
-Filename: Orbit.toml
-``` toml
-# ...
-[dependencies]
-amp = "1.0.0"
-```
-
-3. Include the packages as normal in your current project's VHDL files wherever necessary:
+After installing and adding `amp` to your project's Orbit.toml file, use the package wherever necessary:
 
 Filename: my_design.vhd
 ``` vhdl
