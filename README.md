@@ -6,6 +6,18 @@ A standard library for VHDL - ___amplified___.
 
 This project is tested using the IEEE standard for VHDL 93, 02, and 08.
 
+### Install
+
+Run the following Orbit command:
+```
+orbit install amp:2.0.0 --url "https://github.com/hyperspace-labs/amp/archive/refs/tags/2.0.0.zip"
+```
+
+Add the following line to your Orbit.toml:
+```
+amp = "2.0.0"
+```
+
 ## Packages
 
 Common functionality is grouped together within packages. However, if designs are frequently requiring many of `amp`'s packages, then the `prelude` package is available to import most functionality under a single package.
@@ -28,13 +40,13 @@ This package strives to meet the following objectives:
 
 ## How to Use
 
-1. Install the latest version of `amp` using `orbit`:
+1. Install the latest version of `amp` using Orbit:
 
 ```
 orbit install amp:2.0.0 --url "https://github.com/hyperspace-labs/amp/archive/refs/tags/2.0.0.zip"
 ```
 
-2. Update your current project's `orbit` manifest file with `amp` as a dependency:
+2. Update your current project's manifest file by adding `amp` as a dependency:
 
 Filename: Orbit.toml
 ``` toml
