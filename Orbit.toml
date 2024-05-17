@@ -1,9 +1,10 @@
 [ip]
 name = "amp"
+version = "1.0.0"
+description = "Types and functions using the IEEE standard library"
 library = "amp"
-summary = "an amplified standard library"
-version = "1.0.0" # dev
 source = "https://github.com/hyperspace-labs/amp/archive/refs/tags/1.0.0.zip"
+public = ["/src"]
 
 # See more keys and their definitions at https://cdotrus.github.io/orbit/reference/manifest.html
 
