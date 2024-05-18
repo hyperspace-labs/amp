@@ -29,7 +29,7 @@ package types is
   subtype i16 is integer range -32768 to 32767;
 
   -- The 32-bit signed integer type.
-  subtype i32 is integer range -2147483648 to 2147483647;
+  subtype i32 is integer range -2147483647 to 2147483647;
 
   -- The 8-bit unsigned integer type.
   subtype u8 is natural range 0 to 255;
