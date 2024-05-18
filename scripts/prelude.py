@@ -13,7 +13,7 @@ FILE_ORDER = [
     ('cast.vhd', True),
     ('manip.vhd', True),
     ('math.vhd', False),
-    ('dim.vhd', False),
+    ('dims.vhd', False),
 ]
 
 pkg_headers = []

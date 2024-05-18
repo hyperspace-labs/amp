@@ -4,13 +4,13 @@ use ieee.numeric_std.all;
 
 library work;
 use work.types.all;
-use work.dim.all;
+use work.dims.all;
 use work.cast.all;
 
-entity dim_tb is
+entity dims_tb is
 end entity;
 
-architecture sim of dim_tb is
+architecture sim of dims_tb is
 
   signal s0: logic;
 

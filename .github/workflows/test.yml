@@ -55,9 +55,9 @@ jobs:
           orbit b -- --std=02
           orbit b -- --std=08
 
-      - name: Test dim package
+      - name: Test dims package
         run: |
-          orbit plan --clean --plugin gsim --bench dim_tb
+          orbit plan --clean --plugin gsim --bench dims_tb
           orbit b -- --std=93
           orbit b -- --std=02
           orbit b -- --std=08

@@ -1,5 +1,5 @@
 -- Project: amp
--- Package: dim
+-- Package: dims
 --
 -- This package contains functions for performing operations in a dimensional
 -- space on linear (1D) arrays.
@@ -10,7 +10,7 @@ use ieee.std_logic_1164.all;
 library work;
 use work.types.all;
 
-package dim is
+package dims is
 
   -- Returns a subspace of len(`v_slice`) at index `i` of the entire space `v_array`.
   -- 
@@ -51,7 +51,7 @@ package dim is
 end package;
 
 
-package body dim is
+package body dims is
 
   function get_slice(v_array: logics; v_slice: logics; i: usize; offset: usize := 0) return logics is
     variable shift: usize := offset + v_array'low;

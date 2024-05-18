@@ -20,7 +20,9 @@ amp = "1.0.0"
 
 ## Packages
 
-Common functionality is grouped together within packages. However, if designs are frequently requiring many of `amp`'s packages, then the `prelude` package is available to import most functionality under a single package.
+Common functionality is grouped together within packages. A special `prelude` package exists as means to gather the set of commonly used and most basic types and functions. Keeping the `prelude` package a relatively lean set of items allows advantages in reduced complexity and size of the prelude, while allowing to be more easily assimilated into other projects. If not using the `prelude` package, a user must explicitly specify each package that is otherwise included in the prelude.
+
+The following packages are currently available:
 
 Name | Description | Included in `prelude`?
 -- | -- | --
@@ -28,7 +30,7 @@ Name | Description | Included in `prelude`?
 `cast` | Convenient conversions between types | ✔ 
 `manip` | Bit manipulation operations | ✔ 
 `math` | Compile-time arithmetic functions |
-`dim` | Functions for interpreting linear vectors in multi-dimensional space | 
+`dims` | Functions for interpreting linear vectors in multi-dimensional space | 
 
 ## Project Goals
 

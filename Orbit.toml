@@ -1,7 +1,7 @@
 [ip]
 name = "amp"
 version = "1.0.0"
-description = "Types and functions using the IEEE standard library"
+description = "Basic types and functions using the IEEE standard library"
 library = "amp"
 source = "https://github.com/hyperspace-labs/amp/archive/refs/tags/1.0.0.zip"
 public = ["/src"]
