@@ -29,7 +29,7 @@ architecture sim of mux_tb is
   signal clk: logic := '0';
 
   signal a: logics(WORD_SIZE*SEL_COUNT-1 downto 0) := (others => '0');
-  signal sel: logics(length_bits_enum(SEL_COUNT)-1 downto 0) := (others => '0');
+  signal sel: logics(enum(SEL_COUNT)-1 downto 0) := (others => '0');
   signal y: logics(WORD_SIZE-1 downto 0);
 
 begin
@@ -63,22 +63,22 @@ begin
 
     a <= g & f & e & d;
 
-    s := logics(to_usign(1, length_bits_enum(SEL_COUNT)));
+    s := logics(to_usign(1, enum(SEL_COUNT)));
     sel <= s;
     wait until rising_edge(clk);
     report to_str(y);
 
-    s := logics(to_usign(2, length_bits_enum(SEL_COUNT)));
+    s := logics(to_usign(2, enum(SEL_COUNT)));
     sel <= s;
     wait until rising_edge(clk);
     report to_str(y);
 
-    s := logics(to_usign(0, length_bits_enum(SEL_COUNT)));
+    s := logics(to_usign(0, enum(SEL_COUNT)));
     sel <= s;
     wait until rising_edge(clk);
     report to_str(y);
 
-    s := logics(to_usign(3, length_bits_enum(SEL_COUNT)));
+    s := logics(to_usign(3, enum(SEL_COUNT)));
     sel <= s;
     wait until rising_edge(clk);
     report to_str(y);

@@ -47,19 +47,13 @@ package math is
   -- values in a set.
   --
   -- Internally, this function uses `clog2(...)`.
-  function length_bits_enum(k: usize) return usize;
+  function enum(k: usize) return usize;
 
   -- Computes the minimum number of bits required to represent the decimal
   -- number `k` in a base 2 numbering system.
   --
   -- Internally, this function uses `flog2p1(...)`.
-  function length_bits_repr(k: usize) return usize;
-
-  -- Computes the index of the highest bit position that is set for the given
-  -- integer represented in base 2. This function assumes zero-based indices.
-  --
-  -- Internally, this function uses `flog2p1(...)` and then subtracts 1.
-  function highest_bit_set(k: usize) return usize;
+  function repr(k: usize) return usize;
 
 end package;
 
@@ -143,21 +137,15 @@ package body math is
   end function;
 
 
-  function length_bits_enum(k: usize) return usize is
+  function enum(k: usize) return usize is
   begin
     return clog2(k);
   end function;
 
 
-  function length_bits_repr(k: usize) return usize is
+  function repr(k: usize) return usize is
   begin
     return flog2p1(k);
-  end function;
-
-
-  function highest_bit_set(k: usize) return usize is
-  begin
-    return flog2p1(k)-1;
   end function;
 
 end package body;

@@ -20,7 +20,7 @@ architecture sim of math_tb is
 
   constant STEPS: usize := 16;
 
-  signal counter: logics(highest_bit_set(STEPS) downto 0) := logics(to_usign(STEPS, highest_bit_set(STEPS)+1));
+  signal counter: logics(repr(STEPS)-1 downto 0) := logics(to_usign(STEPS, repr(STEPS)));
 
 begin
 
@@ -54,8 +54,8 @@ begin
       assert soln_pow2m1(i) = pow2m1(k) report "MATH.POW2M1: incorrect result k = " & usize'image(k) & ", got: " & usize'image(pow2m1(k)) & ", expected: " & usize'image(soln_pow2m1(i)) severity error;
       assert soln_is_pow2(i) = is_pow2(k) report "MATH.IS_POW2: incorrect result k = " & usize'image(k) & ", got: " & bool'image(is_pow2(k)) & ", expected: " & bool'image(soln_is_pow2(i)) severity error;
       
-      assert soln_clog2(i) = length_bits_enum(k) report "MATH.LEN_BITS_ENUM: incorrect result" severity error;
-      assert soln_flog2p1(i) = length_bits_repr(k) report "MATH.LEN_BITS_REPR: incorrect result" severity error;
+      assert soln_clog2(i) = enum(k) report "MATH.LEN_BITS_ENUM: incorrect result" severity error;
+      assert soln_flog2p1(i) = repr(k) report "MATH.LEN_BITS_REPR: incorrect result" severity error;
     end loop;
 
     -- test higher k values
@@ -65,8 +65,8 @@ begin
       assert soln_flog2p1(i) = flog2p1(k) report "MATH.FLOG2P1: incorrect result k = " & usize'image(k) & ", got: " & usize'image(flog2p1(k)) & ", expected: " & usize'image(soln_flog2p1(i)) severity error;
       assert soln_is_pow2(i) = is_pow2(k) report "MATH.IS_POW2: incorrect result k = " & usize'image(k) & ", got: " & bool'image(is_pow2(k)) & ", expected: " & bool'image(soln_is_pow2(i)) severity error;
     
-      assert soln_clog2(i) = length_bits_enum(k) report "MATH.LEN_BITS_ENUM: incorrect result" severity error;
-      assert soln_flog2p1(i) = length_bits_repr(k) report "MATH.LEN_BITS_REPR: incorrect result" severity error;
+      assert soln_clog2(i) = enum(k) report "MATH.LEN_BITS_ENUM: incorrect result" severity error;
+      assert soln_flog2p1(i) = repr(k) report "MATH.LEN_BITS_REPR: incorrect result" severity error;
     end loop;
 
     wait;

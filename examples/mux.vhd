@@ -21,17 +21,19 @@ entity mux is
   );
   port(
     a: in logics(WORD_SIZE*SEL_COUNT-1 downto 0);
-    sel: in logics(length_bits_enum(SEL_COUNT)-1 downto 0);
+    sel: in logics(enum(SEL_COUNT)-1 downto 0);
     y: out logics(WORD_SIZE-1 downto 0)
   );
 end entity;
 
 architecture gp of mux is
 
-  constant y_inner: logics(y'range) := (others => '0');
+  signal y_inner: logics(y'range);
 
 begin
   
-  y <= get_slice(a, y_inner, usize(to_int(usign(sel))));
+  y_inner <= get_slice(a, y_inner, to_int(usign(sel)));
+
+  y <= y_inner;
 
 end architecture;
