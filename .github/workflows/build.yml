@@ -28,7 +28,7 @@ jobs:
 
       - name: Generate bistream for top
         run: |
-          orbit build --top mux --target quartz -- --synth -gWORD_SIZE=8 -gSEL_COUNT=2
+          orbit build --top mux --target quartz -- --synth -gWORD_SIZE=8 -gSEL_COUNT=2 --family MAX10 --device 10M50DAF484C7G
 
       - name: Save Results
         uses: actions/upload-artifact@v3
