@@ -16,21 +16,21 @@ package dims is
   -- 
   -- This function can be interpreted as returning the 1-dimensional slice from a 
   -- 2-dimensional array.
-  function get_slice(v_array: logics; v_slice: logics; i: usize; offset: usize := 0) return logics;
+  function get_slice(constant v_array: logics; constant v_slice: logics; constant i: usize; constant offset: usize := 0) return logics;
 
   -- Returns the entire space `v_array` after storing the subspace `v_slice` at
   -- index `i` of the entire space `v_array`.
   --
   -- This function can be interpreted as returning the n-dimensional array after
   -- modifying the 1-dimensional slice at index `i` with the value of `v_slice`.
-  function set_slice(v_array: logics; v_slice: logics; i: usize; offset: usize := 0) return logics;
+  function set_slice(constant v_array: logics; constant v_slice: logics; constant i: usize; constant offset: usize := 0) return logics;
 
   -- Returns a subspace of the len(`v_slice`) at the location determined by the higher dimension `axes` and
   -- `coordinates` of the entire space `v_array`.
   --
   -- This function can be interpreted as returning the (n-1)-dimensional slice from an n-dimensional
   -- array.
-  function get_slice(v_array: logics; v_slice: logics; axes: psizes; coordinates: usizes; offset: usize := 0) return logics;
+  function get_slice(constant v_array: logics; constant v_slice: logics; constant axes: psizes; constant coordinates: usizes; constant offset: usize := 0) return logics;
   
   -- Returns the entire space `v_array` after storing the subspace `v_slice` at the location
   -- determined by the higher dimension `axes` and `coordinates` in the entire space `v_array`.
@@ -38,7 +38,7 @@ package dims is
   -- This function can be interpreted as returning the n-dimensional array after
   -- modifying the 1-dimensional slice at the location defined by the `axes` and `coordinates`
   -- with the value of `v_slice`.
-  function set_slice(v_array: logics; v_slice: logics; axes: psizes; coordinates: usizes; offset: usize := 0) return logics;
+  function set_slice(constant v_array: logics; constant v_slice: logics; constant axes: psizes; constant coordinates: usizes; constant offset: usize := 0) return logics;
 
   -- Returns the index to a point in the multi-dimensional space defined by lengths defined
   -- in `axes` and by positions defined in `coordinates`.
@@ -46,14 +46,14 @@ package dims is
   -- Each element in the corresponding lists should be ordered from highest
   -- dimensions to lowest dimension. For example, for a 3-dimensional space
   -- defined by X, Y, and Z, the order is (Z, Y, X).
-  function index_space(axes: psizes; coordinates: usizes) return usize;
+  function index_space(constant axes: psizes; constant coordinates: usizes) return usize;
 
 end package;
 
 
 package body dims is
 
-  function get_slice(v_array: logics; v_slice: logics; i: usize; offset: usize := 0) return logics is
+  function get_slice(constant v_array: logics; constant v_slice: logics; constant i: usize; constant offset: usize := 0) return logics is
     variable shift: usize := offset + v_array'low;
     variable len_slice: usize := v_slice'length;
   begin
@@ -65,7 +65,7 @@ package body dims is
   end function;
 
 
-  function set_slice(v_array: logics; v_slice: logics; i: usize; offset: usize := 0) return logics is
+  function set_slice(constant v_array: logics; constant v_slice: logics; constant i: usize; constant offset: usize := 0) return logics is
     variable shift: usize := offset + v_array'low;
     variable len_slice: usize := v_slice'length;
     variable inner_v_array: logics(v_array'range) := v_array;
@@ -79,7 +79,7 @@ package body dims is
   end function;
 
 
-  function get_slice(v_array: logics; v_slice: logics; axes: psizes; coordinates: usizes; offset: usize := 0) return logics is
+  function get_slice(constant v_array: logics; constant v_slice: logics; constant axes: psizes; constant coordinates: usizes; constant offset: usize := 0) return logics is
     variable shift: usize := offset + v_array'low;
     variable len_slice: usize := v_slice'length;
     variable i: usize := index_space(axes, coordinates);
@@ -92,7 +92,7 @@ package body dims is
   end function;
 
 
-  function set_slice(v_array: logics; v_slice: logics; axes: psizes; coordinates: usizes; offset: usize := 0) return logics is
+  function set_slice(constant v_array: logics; constant v_slice: logics; constant axes: psizes; constant coordinates: usizes; constant offset: usize := 0) return logics is
     variable shift: usize := offset + v_array'low;
     variable len_slice: usize := v_slice'length;
     variable inner_v_array: logics(v_array'range) := v_array;
@@ -107,7 +107,7 @@ package body dims is
   end function;
 
 
-  function index_space(axes: psizes; coordinates: usizes) return usize is 
+  function index_space(constant axes: psizes; constant coordinates: usizes) return usize is 
     variable result: usize := 0;
     variable jump: usize := 1;
     variable len: usize := axes'length;
