@@ -1,0 +1,41 @@
+name: Build
+on:
+  push:
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    container:
+      image: cdotrus/quiet-quartet:latest
+    env:
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
+      ACTIONS_RUNNER_FORCE_ACTIONS_NODE_VERSION: node16
+    steps:
+      - name: Fetch repository
+        uses: actions/checkout@v3
+
+      - name: Log all tool versions
+        run: |
+          orbit --version  
+          python --version
+          quartus_sh --version
+
+      - name: Configure orbit profile
+        run: |
+          git clone https://github.com/hyperspace-labs/orbit-profile.git "$(orbit env ORBIT_HOME)/profiles/hyperspace-labs"
+          pip install -r "$(orbit env ORBIT_HOME)/profiles/hyperspace-labs/requirements.txt"
+          orbit config --append include="profiles/hyperspace-labs/config.toml"
+
+      - name: Generate bistream for top
+        run: |
+          orbit build --top mux --target quartz -- --synth -gWORD_SIZE=8 -gSEL_COUNT=2
+
+      - name: Save Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: Top
+          path: |
+            target/quartz/**/*.summary
+            target/quartz/**/*.rpt
+            target/quartz/**/*.sof
+            target/quartz/**/*.pof
