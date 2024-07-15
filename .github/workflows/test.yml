@@ -19,9 +19,9 @@ jobs:
         
       - name: Configure orbit profile
         run: |
-          git clone https://github.com/cdotrus/orbit-profile.git "$(orbit env ORBIT_HOME)/profiles/cdotrus"
-          pip install -r "$(orbit env ORBIT_HOME)/profiles/cdotrus/requirements.txt"
-          orbit config --append include="profiles/cdotrus/config.toml"
+          git clone https://github.com/hyperspace-labs/orbit-profile.git "$(orbit env ORBIT_HOME)/profiles/hyperspace-labs"
+          pip install -r "$(orbit env ORBIT_HOME)/profiles/hyperspace-labs/requirements.txt"
+          orbit config --append include="profiles/hyperspace-labs/config.toml"
 
       - name: Verify prelude package has latest changes
         run: |
