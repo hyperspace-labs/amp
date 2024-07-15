@@ -32,7 +32,10 @@ architecture gp of mux is
 
 begin
   
-  y_inner <= get_slice(a, y_inner, to_int(usign(sel)));
+  process(a, sel)
+  begin
+    y_inner <= get_slice(a, y_inner, to_int(usign(sel)));
+  end process;
 
   y <= y_inner;
 

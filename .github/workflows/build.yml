@@ -26,14 +26,14 @@ jobs:
           pip install -r "$(orbit env ORBIT_HOME)/profiles/hyperspace-labs/requirements.txt"
           orbit config --append include="profiles/hyperspace-labs/config.toml"
 
-      - name: Generate bistream for top
+      - name: Synthesize mux
         run: |
           orbit build --top mux --target quartz -- --synth -gWORD_SIZE=8 -gSEL_COUNT=2 --family MAX10 --device 10M50DAF484C7G
 
       - name: Save Results
         uses: actions/upload-artifact@v3
         with:
-          name: Top
+          name: Mux
           path: |
             target/quartz/**/*.summary
             target/quartz/**/*.rpt
