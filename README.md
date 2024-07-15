@@ -10,7 +10,7 @@ This project is tested using the IEEE standard for VHDL 93, 02, and 08.
 
 Run the following Orbit command:
 ```
-orbit install amp:1.0.0 --url "https://github.com/hyperspace-labs/amp/archive/refs/tags/1.0.0.zip"
+orbit install --url "https://github.com/hyperspace-labs/amp/archive/refs/tags/1.0.0.zip"
 ```
 
 Add the following line to your Orbit.toml:

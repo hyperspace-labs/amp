@@ -1,4 +1,4 @@
-name: test
+name: Test
 on:
   push:
 
@@ -29,42 +29,36 @@ jobs:
 
       - name: Perform static analysis
         run: |
-          orbit plan --clean --plugin gsim --all
-          orbit b -- --lint --std=93
-          orbit b -- --lint --std=02
-          orbit b -- --lint --std=08
+          orbit b --target gsim --all -- --lint --std=93
+          orbit b --target gsim --all -- --lint --std=02
+          orbit b --target gsim --all -- --lint --std=08
 
       - name: Test types package
         run: |
-          orbit plan --clean --plugin gsim --bench types_tb
-          orbit b -- --std=93
-          orbit b -- --std=02
-          orbit b -- --std=08
+          orbit t --target gsim --tb types_tb -- --std=93
+          orbit t --target gsim --tb types_tb -- --std=02
+          orbit t --target gsim --tb types_tb -- --std=08
 
       - name: Test math package
         run: |
-          orbit plan --clean --plugin gsim --bench math_tb
-          orbit b -- --std=93
-          orbit b -- --std=02
-          orbit b -- --std=08
+          orbit t --target gsim --tb math_tb -- --std=93
+          orbit t --target gsim --tb math_tb -- --std=02
+          orbit t --target gsim --tb math_tb -- --std=08
 
       - name: Test manip package
         run: |
-          orbit plan --clean --plugin gsim --bench manip_tb
-          orbit b -- --std=93
-          orbit b -- --std=02
-          orbit b -- --std=08
+          orbit t --target gsim --tb manip_tb -- --std=93
+          orbit t --target gsim --tb manip_tb -- --std=02
+          orbit t --target gsim --tb manip_tb -- --std=08
 
       - name: Test dims package
         run: |
-          orbit plan --clean --plugin gsim --bench dims_tb
-          orbit b -- --std=93
-          orbit b -- --std=02
-          orbit b -- --std=08
+          orbit t --target gsim --tb dims_tb -- --std=93
+          orbit t --target gsim --tb dims_tb -- --std=02
+          orbit t --target gsim --tb dims_tb -- --std=08
 
       - name: Test cast package
         run: |
-          orbit plan --clean --plugin gsim --bench cast_tb
-          orbit b -- --std=93
-          orbit b -- --std=02
-          orbit b -- --std=08
+          orbit t --target gsim --tb cast_tb -- --std=93
+          orbit t --target gsim --tb cast_tb -- --std=02
+          orbit t --target gsim --tb cast_tb -- --std=08

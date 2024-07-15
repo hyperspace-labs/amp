@@ -2,10 +2,10 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-library work;
-use work.types.all;
-use work.dims.all;
-use work.cast.all;
+library amp;
+use amp.types.all;
+use amp.dims.all;
+use amp.cast.all;
 
 entity dims_tb is
 end entity;

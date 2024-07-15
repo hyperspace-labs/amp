@@ -2,8 +2,7 @@
 name = "amp"
 version = "1.0.0"
 description = "Basic types and functions using the IEEE standard library"
-library = "amp"
-source = "https://github.com/hyperspace-labs/amp/archive/refs/tags/1.0.0.zip"
+source = "https://github.com/hyperspace-labs/amp/archive/refs/tags/{{orbit.ip.version}}.zip"
 public = ["/src"]
 
 # See more keys and their definitions at https://cdotrus.github.io/orbit/reference/manifest.html
