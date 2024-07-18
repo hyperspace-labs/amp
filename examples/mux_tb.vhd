@@ -10,7 +10,7 @@ library std;
 use std.textio.all;
 
 library amp;
-use amp.prelude.all;
+use amp.ere.all;
 use amp.dims.all;
 use amp.math.all;
 

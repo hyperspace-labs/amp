@@ -2,9 +2,9 @@
 
 [![Test](https://github.com/hyperspace-labs/amp/actions/workflows/test.yml/badge.svg)](https://github.com/hyperspace-labs/amp/actions/workflows/test.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Amp is a library that provide a layer of convenience and additional functionality to the existing ieee library for VHDL.
+Amp is a library that provide a layer of convenience and additional functionality to the existing IEEE library for VHDL.
 
-This project is tested using the ieee library implementations for VHDL 93, 02, and 08.
+This project is tested using the IEEE library implementations for VHDL 93, 02, and 08.
 
 ## Install
 
@@ -20,11 +20,11 @@ amp = "1.0.0"
 
 ## Details
 
-Amp groups common functionality together in packages. A special `prelude` package exists as means to gather the set of commonly used and most basic types and functions. Keeping the `prelude` package a relatively lean set of items allows advantages in reduced complexity and size of the prelude, while allowing to be more easily assimilated into other projects. If not using the `prelude` package, a user must explicitly specify each package that is otherwise included in the prelude.
+Amp groups common functionality together in packages. A special prelude package exists called `ere` as means to gather the set of commonly used and most basic types and functions. Keeping the prelude package a relatively lean set of items allows advantages in reduced complexity and size of the prelude, while allowing to be more easily assimilated into other projects. If not using the prelude package, a user must explicitly specify each package that is otherwise included in the prelude.
 
 The following packages are currently available:
 
-Name | Description | Included in `prelude`?
+Name | Description | Included in `ere` prelude?
 -- | -- | --
 `types` | Improved type names and additional types | ✔ 
 `cast` | Convenient conversions between types | ✔ 
@@ -49,7 +49,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 library amp;
-use amp.prelude.all;
+use amp.ere.all;
 
 entity my_design is
 -- ...

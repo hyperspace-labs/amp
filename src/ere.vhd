@@ -1,5 +1,5 @@
 -- Project: amp
--- Package: prelude
+-- Package: ere
 --
 -- This package brings the separate VHDL packages under a single package
 -- for more convenient importing. This package is auto-generated; DO NOT EDIT.
@@ -8,7 +8,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-package prelude is
+package ere is
 
   -- An unresolved logic type.
   subtype logic is std_ulogic;
@@ -229,7 +229,7 @@ package prelude is
 
 end package;
 
-package body prelude is
+package body ere is
 
   function to_str(v: logics) return str is
     variable word: str(1 to v'length);

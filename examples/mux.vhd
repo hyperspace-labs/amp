@@ -1,5 +1,5 @@
 -- Project: Amp
--- Entity: mux
+-- Entity: Mux
 --
 -- This design unit is a generic mux that showcases one way to use the
 -- Amp library.
@@ -8,9 +8,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 library amp;
-use amp.prelude.all;
+use amp.ere.all;
 use amp.math.all;
-use amp.dims.all;
 
 entity mux is 
   generic(
@@ -31,11 +30,8 @@ architecture gp of mux is
   signal y_inner: logics(y'range);
 
 begin
-  
-  process(a, sel)
-  begin
-    y_inner <= get_slice(a, y_inner, to_int(usign(sel)));
-  end process;
+
+  y_inner <= a(((to_int(usign(sel))+1)*y_inner'length)-1+0 downto (to_int(usign(sel))*y_inner'length)+0);
 
   y <= y_inner;
 
