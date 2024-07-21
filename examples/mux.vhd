@@ -7,9 +7,9 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-library amp;
-use amp.ere.all;
-use amp.math.all;
+library micro;
+use micro.amp.all;
+use micro.math.all;
 
 entity mux is 
   generic(

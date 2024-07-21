@@ -9,10 +9,10 @@ use ieee.std_logic_1164.all;
 library std;
 use std.textio.all;
 
-library amp;
-use amp.ere.all;
-use amp.dims.all;
-use amp.math.all;
+library micro;
+use micro.amp.all;
+use micro.dims.all;
+use micro.math.all;
 
 entity mux_tb is
   generic(

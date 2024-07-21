@@ -20,11 +20,11 @@ amp = "1.0.0"
 
 ## Details
 
-Amp groups common functionality together in packages. A special prelude package exists called `ere` as means to gather the set of commonly used and most basic types and functions. Keeping the prelude package a relatively lean set of items allows advantages in reduced complexity and size of the prelude, while allowing to be more easily assimilated into other projects. If not using the prelude package, a user must explicitly specify each package that is otherwise included in the prelude.
+Amp groups common functionality together in packages. A special prelude package exists called `amp` as means to gather the set of commonly used and most basic types and functions. Keeping the prelude package a relatively lean set of items allows advantages in reduced complexity and size of the prelude, while allowing to be more easily assimilated into other projects. If not using the prelude package, a user must explicitly specify each package that is otherwise included in the prelude.
 
 The following packages are currently available:
 
-Name | Description | Included in `ere` prelude?
+Name | Description | Included in `amp` prelude?
 -- | -- | --
 `types` | Improved type names and additional types | ✔ 
 `cast` | Convenient conversions between types | ✔ 
@@ -48,8 +48,8 @@ After installing Amp and adding it as a dependency in your local project's Orbit
 library ieee;
 use ieee.std_logic_1164.all;
 
-library amp;
-use amp.ere.all;
+library micro;
+use micro.amp.all;
 
 entity my_design is
 -- ...

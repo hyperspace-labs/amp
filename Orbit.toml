@@ -1,5 +1,6 @@
 [ip]
 name = "amp"
+library = "micro"
 version = "1.0.0"
 description = "Basic types and functions extending the ieee library"
 source = "https://github.com/hyperspace-labs/amp/archive/refs/tags/{{orbit.ip.version}}.zip"

@@ -1,14 +1,13 @@
--- Project: amp
--- Package: ere
+-- Project: Amp
+-- Package: amp
 --
--- This package brings the separate VHDL packages under a single package
--- for more convenient importing. This package is auto-generated; DO NOT EDIT.
+-- Introduces basic types and functions that extend the ieee library.
 
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-package ere is
+package amp is
 
   -- An unresolved logic type.
   subtype logic is std_ulogic;
@@ -229,7 +228,7 @@ package ere is
 
 end package;
 
-package body ere is
+package body amp is
 
   function to_str(v: logics) return str is
     variable word: str(1 to v'length);

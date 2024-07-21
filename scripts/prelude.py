@@ -53,30 +53,29 @@ for (path, should_inc) in FILE_ORDER:
 
 
 HEADER = '''\
--- Project: amp
--- Package: ere
+-- Project: Amp
+-- Package: amp
 --
--- This package brings the separate VHDL packages under a single package
--- for more convenient importing. This package is auto-generated; DO NOT EDIT.
+-- Introduces basic types and functions that extend the ieee library.
 
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 '''
 
-PACKAGE_DECL = 'package ere is'
+PACKAGE_DECL = 'package amp is'
 for header in pkg_headers:
     PACKAGE_DECL += header[:-1]
 PACKAGE_DECL += '\n\nend package;'
 
-PACKAGE_BODY = 'package body ere is'
+PACKAGE_BODY = 'package body amp is'
 for body in pkg_bodies:
     PACKAGE_BODY += body
 PACKAGE_BODY += '\n\nend package body;'
 
 prelude_data = HEADER + '\n' + PACKAGE_DECL + '\n\n' + PACKAGE_BODY
 
-prelude_filepath = SRC_DIR + '/' + 'ere.vhd'
+prelude_filepath = SRC_DIR + '/' + 'amp.vhd'
 
 rc = 0
 
