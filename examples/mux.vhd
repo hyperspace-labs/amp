@@ -32,8 +32,8 @@ architecture gp of mux is
 
 begin
 
-  -- y_inner <= a(((to_int(usign(sel))+1)*y_inner'length)-1+0 downto (to_int(usign(sel))*y_inner'length)+0);
-  y_inner <= a(index(1, sel, y_inner'length)-1 downto index(0, sel, y_inner'length));
+  y_inner <= a(((to_int(usign(sel))+1)*y_inner'length)-1+0 downto (to_int(usign(sel))*y_inner'length)+0);
+  -- y_inner <= a(index(1, sel, y_inner'length)-1 downto index(0, sel, y_inner'length));
   
   y <= y_inner;
 
