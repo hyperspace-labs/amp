@@ -7,9 +7,10 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-library micro;
-use micro.amp.all;
-use micro.math.all;
+library nano;
+use nano.amp.all;
+use nano.math.all;
+use nano.dims.all;
 
 entity mux is 
   generic(
@@ -31,8 +32,11 @@ architecture gp of mux is
 
 begin
 
-  y_inner <= a(((to_int(usign(sel))+1)*y_inner'length)-1+0 downto (to_int(usign(sel))*y_inner'length)+0);
-
+  -- y_inner <= a(((to_int(usign(sel))+1)*y_inner'length)-1+0 downto (to_int(usign(sel))*y_inner'length)+0);
+  y_inner <= a(index(1, sel, y_inner'length)-1 downto index(0, sel, y_inner'length));
+  
   y <= y_inner;
+
+  
 
 end architecture;

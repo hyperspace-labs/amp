@@ -9,6 +9,7 @@ use ieee.std_logic_1164.all;
 
 library work;
 use work.types.all;
+use work.cast.all;
 
 package dims is
 
@@ -48,10 +49,17 @@ package dims is
   -- defined by X, Y, and Z, the order is (Z, Y, X).
   function index_space(constant axes: psizes; constant coordinates: usizes) return usize;
 
+  function index(constant shift: int; constant addr: logics; constant word: int) return int;
 end package;
 
 
 package body dims is
+
+  function index(constant shift: int; constant addr: logics; constant word: int) return int is
+  begin
+    return (to_int(usign(addr))+shift)*word;
+  end function;
+
 
   function get_slice(constant v_array: logics; constant v_slice: logics; constant i: isize; constant offset: isize := 0) return logics is
     variable shift: isize := offset + v_array'low;

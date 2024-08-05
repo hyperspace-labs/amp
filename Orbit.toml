@@ -1,11 +1,11 @@
 [ip]
 name = "amp"
-library = "micro"
+library = "nano"
 version = "1.0.0"
 description = "Basic types and functions extending the ieee library"
 source = "https://github.com/hyperspace-labs/amp/archive/refs/tags/{{orbit.ip.version}}.zip"
 public = ["/src"]
 
-# See more keys and their definitions at https://cdotrus.github.io/orbit/reference/manifest.html
+# See more keys and their definitions at https://chaseruskin.github.io/orbit/reference/manifest.html
 
 [dependencies]
