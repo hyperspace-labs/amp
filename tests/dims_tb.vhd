@@ -60,7 +60,7 @@ begin
     variable row: logics(X_LEN-1 downto 0);
     variable col: logics(Y_LEN-1 downto 0);
 
-    variable cs2: usize := index_space((B_LEN, A_LEN), (3, 1));
+    variable cs2: usize := into_index((B_LEN, A_LEN), (3, 1));
 
   begin
     row := get_slice(grid, row, 0);
@@ -74,10 +74,10 @@ begin
     assert cs2 = 7 report "index: " & int'image(cs2) severity error;
     
     assert g3d = "0011000000000000" report "g3d: " & to_str(g3d) severity error;
-    assert g3d(index_space((C_LEN, B_LEN, A_LEN), (1, 2, 0))) = '1' severity error;
-    assert g3d(index_space((C_LEN, B_LEN, A_LEN), (1, 2, 1))) = '1' severity error;
-    assert g3d(index_space((C_LEN, B_LEN, A_LEN), (1, 1, 1))) = '0' severity error;
-    assert g3d(index_space((C_LEN, B_LEN, A_LEN), (1, 3, 0))) = '0' severity error;
+    assert g3d(into_index((C_LEN, B_LEN, A_LEN), (1, 2, 0))) = '1' severity error;
+    assert g3d(into_index((C_LEN, B_LEN, A_LEN), (1, 2, 1))) = '1' severity error;
+    assert g3d(into_index((C_LEN, B_LEN, A_LEN), (1, 1, 1))) = '0' severity error;
+    assert g3d(into_index((C_LEN, B_LEN, A_LEN), (1, 3, 0))) = '0' severity error;
     
     assert get_slice(g3d, a1d, (C_LEN, B_LEN), (1, 2)) = "11" severity error;
     wait;

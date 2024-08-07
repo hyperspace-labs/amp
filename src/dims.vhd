@@ -78,7 +78,7 @@ package body dims is
   function get_slice(constant v_array: logics; constant v_slice: logics; constant axes: psizes; constant coordinates: usizes; constant offset: isize := 0) return logics is
     variable shift: isize := offset + v_array'low;
     variable len_slice: isize := v_slice'length;
-    variable i: isize := isize(index_space(axes, coordinates));
+    variable i: isize := isize(into_index(axes, coordinates));
   begin
     if v_array'ascending = true then
       return v_array((i*len_slice)+shift to ((i+1)*len_slice)-1+shift);
@@ -92,7 +92,7 @@ package body dims is
     variable shift: isize := offset + v_array'low;
     variable len_slice: isize := v_slice'length;
     variable inner_v_array: logics(v_array'range) := v_array;
-    variable i: isize := isize(index_space(axes, coordinates));
+    variable i: isize := isize(into_index(axes, coordinates));
   begin
     if v_array'ascending = true then
       inner_v_array((i*len_slice)+shift to ((i+1)*len_slice)-1+shift) := v_slice;
