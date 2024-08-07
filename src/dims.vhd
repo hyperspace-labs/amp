@@ -1,4 +1,4 @@
--- Project: amp
+-- Project: Nanoamp
 -- Package: dims
 --
 -- This package contains functions for performing operations in a dimensional
@@ -50,6 +50,7 @@ package dims is
   function index_space(constant axes: psizes; constant coordinates: usizes) return usize;
 
   function index(constant shift: int; constant addr: logics; constant word: int) return int;
+
 end package;
 
 
@@ -121,21 +122,21 @@ package body dims is
     variable len: usize := axes'length;
   begin
     if axes'length /= coordinates'length then
-      report "DIM.INDEX_SPACE: vector sizes for axes and coordinates do not match" severity warning;
+      report "DIMS.INDEX_SPACE: vector sizes for axes and coordinates do not match" severity warning;
     end if;
     result := jump * coordinates(len-1);
     if coordinates(len-1) >= axes(len-1) then
-      report "DIM.INDEX_SPACE: coordinate at dimension " & int'image(len) & " is out of bounds" severity warning;
+      report "DIMS.INDEX_SPACE: coordinate at dimension " & int'image(len) & " is out of bounds" severity warning;
     end if;
     for k in len-2 downto 0 loop
       jump := jump * axes(k+1);
       result := result + (jump * coordinates(k));
       if coordinates(k) >= axes(k) then
-        report "DIM.INDEX_SPACE: coordinate at dimension " & int'image(k+1) & " is out of bounds" severity warning;
+        report "DIMS.INDEX_SPACE: coordinate at dimension " & int'image(k+1) & " is out of bounds" severity warning;
       end if;
     end loop;
     if result > jump * axes(0) then
-      report "DIM.INDEX_SPACE: coordinate out of bounds" severity warning;
+      report "DIMS.INDEX_SPACE: coordinate out of bounds" severity warning;
     end if;
     return result;
   end function;

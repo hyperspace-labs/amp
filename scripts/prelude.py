@@ -1,8 +1,5 @@
-# Project: amp
-# Script: prelude.py
-#
-# Reads the existing VHDL files and copy/pastes the existing
-# functions and types into a single package called 'prelude'.
+# Reads the existing VHDL files and copy/pastes the existing functions and 
+# types into a single package called `amp`.
 
 import os
 
@@ -53,15 +50,11 @@ for (path, should_inc) in FILE_ORDER:
 
 
 HEADER = '''\
--- Project: Amp
--- Package: amp
---
--- Introduces basic types and functions that extend the ieee library.
-
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
-'''
+
+-- Nicer types and functions extending the ieee library.'''
 
 PACKAGE_DECL = 'package amp is'
 for header in pkg_headers:
@@ -80,10 +73,10 @@ prelude_filepath = SRC_DIR + '/' + 'amp.vhd'
 rc = 0
 
 if os.path.exists(prelude_filepath) == True:
-    exiting_data = ''
+    existing_data = ''
     with open(prelude_filepath, 'r') as fd:
-        exiting_data = fd.read()
-    if exiting_data != prelude_data:
+        existing_data = fd.read()
+    if existing_data != prelude_data:
         print('info: Prelude package is out of sync; rewriting file...')
         rc = 101
     else:

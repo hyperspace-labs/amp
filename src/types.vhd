@@ -1,13 +1,8 @@
--- Project: amp
--- Package: types
---
--- This package contains shorthand notations for the default datatypes as well
--- extensions for common datatypes such as bytes.
-
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+-- Type renaming for common default/standard datatypes.
 package types is
 
   -- An unresolved logic type.

@@ -1,4 +1,4 @@
--- Project: Amp
+-- Project: Nanoamp
 -- Entity: Mux
 --
 -- This design unit is a generic mux that showcases one way to use the
@@ -10,14 +10,13 @@ use ieee.std_logic_1164.all;
 library nano;
 use nano.amp.all;
 use nano.math.all;
-use nano.dims.all;
 
 entity mux is 
   generic(
     -- The width of the words available for selection.
-    WORD_SIZE: psize;
+    WORD_SIZE: pint;
     -- The number of lines to select from (choose a power of 2).
-    SEL_COUNT: psize
+    SEL_COUNT: pint
   );
   port(
     a: in logics(WORD_SIZE*SEL_COUNT-1 downto 0);
@@ -36,7 +35,5 @@ begin
   -- y_inner <= a(index(1, sel, y_inner'length)-1 downto index(0, sel, y_inner'length));
   
   y <= y_inner;
-
-  
 
 end architecture;

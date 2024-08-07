@@ -1,4 +1,4 @@
--- Project: amp
+-- Project: Nanoamp
 -- Testbench: math_tb
 --
 -- Tests the VHDL functions for the math package by used precomputed inputs and

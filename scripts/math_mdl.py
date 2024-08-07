@@ -1,4 +1,4 @@
-# Project: amp
+# Project: Nanoamp
 # Script: math_mdl.py
 #
 # Software models to generate inputs and expected outputs for the VHDL 

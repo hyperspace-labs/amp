@@ -1,43 +1,38 @@
--- Project: amp
--- Package: math
---
--- This package contains helpful compile-time mathematical equations for 
--- counting bits.
-
 library ieee;
 use ieee.std_logic_1164.all;
 
 library work;
 use work.types.all;
 
-package math is    
+-- Compile-time mathematical functions related to bit counts.
+package math is
 
-  -- This function computes the logarithmic (base 2) for `k` and takes the 
-  -- ceiling of the result. It effectively determines the minimum number of 
-  -- bits required to enumerate `k` possible values of a space.
+  -- Computes the logarithmic (base 2) for `k` and takes the ceiling of the 
+  -- result. It effectively determines the minimum number of bits required to 
+  -- enumerate `k` possible values of a space.
   --
-  -- Equation: ceil(log2(k))
+  -- Expression: ceil(log2(k))
   function clog2(k: usize) return usize;
 
-  -- This function determines the minimum number of bits required to represent 
-  -- the `k` as a decimal number in standard binary representation.
+  -- Determines the minimum number of bits required to represent the `k` as a 
+  -- decimal number in standard binary representation.
   --
-  -- Equation: floor(log2(k) + 1)
+  -- Expression: floor(log2(k) + 1)
   function flog2p1(k: usize) return usize;
 
-  -- This function computes 2 raised to the `k` power. It effectively 
-  -- determines the maximum number of values available for `k` bits.
+  -- Computes 2 raised to the `k` power. It effectively determines the maximum 
+  -- number of values available for `k` bits.
   --
-  -- Equation: 2**k
+  -- Expression: 2**k
   function pow2(k: usize) return usize;
 
-  -- This function computes 2 raised to the `k` minus 1 power. It effectively 
-  -- determines the maximum unsigned number represented in base 2 for `k` bits.
+  -- Computes 2 raised to the `k` minus 1 power. It effectively determines the 
+  -- maximum unsigned number represented in base 2 for `k` bits.
   --
-  -- Equation: (2**k)-1
+  -- Expression: (2**k)-1
   function pow2m1(k: usize) return usize;
 
-  -- This function checks if `k` is a power of 2.
+  -- Checks if `k` is a power of 2.
   --
   -- A number is a power of 2 when its binary represetnation has exactly 1 bit 
   -- set to 1.

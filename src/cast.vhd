@@ -1,9 +1,3 @@
--- Project: amp
--- Package: cast
---
--- Conversion functions between data types in VHDL. These functions
--- are called in higher-level hardware driver layer functions.
-
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -11,6 +5,7 @@ use ieee.numeric_std.all;
 library work;
 use work.types.all;
 
+-- Conversions between standard types.
 package cast is
 
   -- Casts a logic vector to a string.

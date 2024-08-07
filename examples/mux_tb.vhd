@@ -1,4 +1,4 @@
--- Project: Amp
+-- Project: Nanoamp
 -- Testbench: mux_tb
 --
 -- Functional verification for the design-under-test (DUT).

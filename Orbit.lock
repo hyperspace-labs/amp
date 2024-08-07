@@ -2,8 +2,8 @@
 version = 1
 
 [[ip]]
-name = "amp"
+name = "nanoamp"
 version = "1.0.0"
-uuid = "33bba0d9-1e0e-4b82-aa90-711d8e4baef7"
-url = "https://github.com/hyperspace-labs/amp/archive/refs/tags/{{orbit.ip.version}}.zip"
+uuid = "d911391e-38d5-4542-8c36-4fb9366096d7"
+url = "https://github.com/hyperspace-labs/nanoamp/archive/refs/tags/{{orbit.ip.version}}.zip"
 dependencies = []
