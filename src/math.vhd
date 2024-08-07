@@ -4,7 +4,7 @@ use ieee.std_logic_1164.all;
 library work;
 use work.types.all;
 
--- Compile-time mathematical functions related to bit counts.
+-- Compile-time mathematical functions for counting bits.
 package math is
 
   -- Computes the logarithmic (base 2) for `k` and takes the ceiling of the 

@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 library work;
 use work.types.all;
 
--- Common bit manipulation tricks on linear vectors.
+-- Bit manipulation operations on linear vectors.
 package manip is
 
   -- Shifts a logic vector logically to the left while inserting zeros from the 

@@ -1,36 +1,36 @@
-# Nanoamp
+# Amp
 
 [![Test](https://github.com/hyperspace-labs/amp/actions/workflows/test.yml/badge.svg)](https://github.com/hyperspace-labs/amp/actions/workflows/test.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Nanoamp is a library that provide a layer of convenience and additional functionality to the existing IEEE library for VHDL.
+Amp is a set of VHDL packages that provide nicer types and missing functionality to the existing standard libraries for VHDL.
 
-This project is tested using the IEEE library implementations for VHDL 93, 02, and 08.
+Amp is tested using the IEEE library implementations for VHDL 93, 02, and 08.
 
 ## Install
 
 Run the following Orbit command:
 ```
-orbit install --url https://github.com/hyperspace-labs/nanoamp/archive/refs/tags/1.0.0.zip
+orbit install --url https://github.com/hyperspace-labs/amp/archive/refs/tags/1.0.0.zip
 ```
 
 Add the following line to your Orbit.toml:
 ``` toml
-amp = "1.0.0"
+amp = "1"
 ```
 
 ## Details
 
-Nanoamp groups common functionality together in packages. A special prelude package exists called `amp` as means to gather the set of commonly used and most basic types and functions. Keeping the prelude package a relatively lean set of items allows advantages in reduced complexity and size of the prelude, while allowing to be more easily assimilated into other projects. If not using the prelude package, a user must explicitly specify each package that is otherwise included in the prelude.
+Amp separates functionality into different VHDL packages. However, to reduce redundantly importing the same set of packages for every design unit, Amp has a special prelude package called `amp`, which contains the same contents as the packages it covers. By using the prelude package, users typically only need to import this package and then they are good to go. If not using the prelude package, a user must explicitly import each package.
 
-The following packages are currently available:
+The following packages can be found in Amp:
 
-Name | Description | Included in `amp` prelude?
+Package | Description | Included in `amp` prelude?
 -- | -- | --
-`types` | Improved type names and additional types | ✔ 
-`cast` | Convenient conversions between types | ✔ 
-`manip` | Bit manipulation operations | ✔ 
-`math` | Compile-time arithmetic functions |
-`dims` | Functions for interpreting linear vectors in multi-dimensional space | 
+`types` | Standard type renaming and additional types | ✔ 
+`cast` | Conversions between standard types | ✔ 
+`manip` | Bit manipulation operations on linear vectors | ✔ 
+`math` | Compile-time mathematical functions for counting bits |
+`dims` | Functions for interpreting linear vectors in multidimensional space | 
 
 ## Project Goals
 
@@ -39,10 +39,11 @@ This package strives to meet the following objectives:
 - __general-purpose__: Be generic enough for practicality in all applications
 - __interoperable__: Be able to be used among varying standards (93, 08, etc.) without breaking existing built-in functionalities
 
-
 ## Usage
 
-After installing Amp and adding it as a dependency in your local project's Orbit.toml file, use the package wherever necessary:
+> __Note__: The set of VHDL packages found under Amp should be mapped to the `nano` library.
+
+After installing Amp and adding it as a dependency in your local ip's Orbit.toml file, use the package for your next design unit:
 
 ``` vhdl
 library ieee;
@@ -55,4 +56,4 @@ entity my_design is
 -- ...
 ```
 
-> __Note__: You may still need to reference ieee packages when using Amp because of how Amp's packages define subtypes and do not redefine ieee functions.
+> __Note__: You may still need to reference relevant IEEE packages when using Amp because of how Amp's packages define subtypes and do not redefine IEEE functions.

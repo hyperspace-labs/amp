@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
--- Nicer types and functions extending the ieee library.
+-- Additional types and functions for standard use.
 package amp is
 
   -- An unresolved logic type.

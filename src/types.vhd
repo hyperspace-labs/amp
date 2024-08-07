@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
--- Type renaming for common default/standard datatypes.
+-- Type renaming and additional types.
 package types is
 
   -- An unresolved logic type.

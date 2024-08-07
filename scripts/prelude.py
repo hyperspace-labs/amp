@@ -54,7 +54,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
--- Nicer types and functions extending the ieee library.'''
+-- Additional types and functions for standard use.'''
 
 PACKAGE_DECL = 'package amp is'
 for header in pkg_headers:

@@ -1,9 +1,3 @@
--- Project: Nanoamp
--- Package: dims
---
--- This package contains functions for performing operations in a dimensional
--- space on linear (1D) arrays.
-
 library ieee;
 use ieee.std_logic_1164.all;
 
@@ -11,6 +5,7 @@ library work;
 use work.types.all;
 use work.cast.all;
 
+-- Functions for interpreting linear vectors in multidimensional space.
 package dims is
 
   -- Returns a subspace of len(`v_slice`) at index `i` of the entire space `v_array`.
