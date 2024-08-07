@@ -42,20 +42,12 @@ package dims is
   -- Each element in the corresponding lists should be ordered from highest
   -- dimensions to lowest dimension. For example, for a 3-dimensional space
   -- defined by X, Y, and Z, the order is (Z, Y, X).
-  function index_space(constant axes: psizes; constant coordinates: usizes) return usize;
-
-  function index(constant shift: int; constant addr: logics; constant word: int) return int;
+  function into_index(constant axes: psizes; constant coordinates: usizes) return usize;
 
 end package;
 
 
 package body dims is
-
-  function index(constant shift: int; constant addr: logics; constant word: int) return int is
-  begin
-    return (to_int(usign(addr))+shift)*word;
-  end function;
-
 
   function get_slice(constant v_array: logics; constant v_slice: logics; constant i: isize; constant offset: isize := 0) return logics is
     variable shift: isize := offset + v_array'low;
@@ -111,27 +103,27 @@ package body dims is
   end function;
 
 
-  function index_space(constant axes: psizes; constant coordinates: usizes) return usize is 
+  function into_index(constant axes: psizes; constant coordinates: usizes) return usize is 
     variable result: usize := 0;
     variable jump: usize := 1;
     variable len: usize := axes'length;
   begin
     if axes'length /= coordinates'length then
-      report "DIMS.INDEX_SPACE: vector sizes for axes and coordinates do not match" severity warning;
+      report "DIMS.INTO_INDEX: vector sizes for axes and coordinates do not match" severity warning;
     end if;
     result := jump * coordinates(len-1);
     if coordinates(len-1) >= axes(len-1) then
-      report "DIMS.INDEX_SPACE: coordinate at dimension " & int'image(len) & " is out of bounds" severity warning;
+      report "DIMS.INTO_INDEX: coordinate at dimension " & int'image(len) & " is out of bounds" severity warning;
     end if;
     for k in len-2 downto 0 loop
       jump := jump * axes(k+1);
       result := result + (jump * coordinates(k));
       if coordinates(k) >= axes(k) then
-        report "DIMS.INDEX_SPACE: coordinate at dimension " & int'image(k+1) & " is out of bounds" severity warning;
+        report "DIMS.INTO_INDEX: coordinate at dimension " & int'image(k+1) & " is out of bounds" severity warning;
       end if;
     end loop;
     if result > jump * axes(0) then
-      report "DIMS.INDEX_SPACE: coordinate out of bounds" severity warning;
+      report "DIMS.INTO_INDEX: coordinate out of bounds" severity warning;
     end if;
     return result;
   end function;

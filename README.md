@@ -57,3 +57,4 @@ entity my_design is
 ```
 
 > __Note__: You may still need to reference relevant IEEE packages when using Amp because of how Amp's packages define subtypes and do not redefine IEEE functions.
+> 
