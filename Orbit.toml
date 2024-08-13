@@ -5,6 +5,7 @@ version = "1.0.0"
 description = "More types and elementary functions"
 source = "https://github.com/hyperspace-labs/amp/archive/refs/tags/{{orbit.ip.version}}.zip"
 public = ["/src"]
+channels = ["hyperspace-labs"]
 
 # See more keys and their definitions at https://chaseruskin.github.io/orbit/reference/manifest.html
 
