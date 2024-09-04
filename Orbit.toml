@@ -1,7 +1,8 @@
 [ip]
 name = "amp"
+uuid = "aarl1e1yutudnxptr5b4g70p0"
 library = "nano"
-version = "1.0.0"
+version = "1.0.1"
 description = "More types and elementary functions"
 source = "https://github.com/hyperspace-labs/amp/archive/refs/tags/{{orbit.ip.version}}.zip"
 public = ["/src"]
